@@ -1,0 +1,183 @@
+﻿@model List<BusinessObject.ViewModel.MenuItemViewModel>
+
+<article id="navbar" class="navbar-container">
+	<nav class="navbar navbar-expand-lg bg-white">
+		<div class="container-fluid">
+			<a class="navbar-brand site-logo px-3 " href="@Url.Action("Index", "Home")">
+				<img src="~/assets/images/site-logo.png" alt="Site Logo" class="img-fluid">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse position-relative" id="navbarNavDropdown">
+				<article class="navbar-content w-100">
+					<ul class="navbar-nav">
+						@foreach (var item in Model.Where(p => p.ParentId == null))
+						{
+							if (item.ChildPages != null && item.ChildPages.Any())
+							{
+								<!-- Page has subpages and dropdown -->
+								<li class="nav-item nav-with-dropdown">
+
+
+									<a class="nav-link" href="@Url.Action("ViewPage", "Page", new { slug = item.Slug })">
+										@item.Title
+									</a>
+
+
+
+									<article class="container dropdown-custom-container bg-white">
+										<article class="row align-items-stretch">
+											<!-- Left Side: Categories and Child Pages -->
+											<article class="col-md-4 left-navbar">
+												<article class="left-navbar-content">
+													<article class="curved-box-content">
+													@* 	<picture class="iflex-logo">
+															<img src="~/assets/images/client-logo-icons/i-flex.png"
+																 alt="I-flex logo" class="img-fluid">
+														</picture> *@
+														<picture class="client-logo">
+															<img src="~/assets/images/client-logo-icons/@(
+						                                     item.Slug == "i-flex" ? "i-flex.png" :
+						                                     item.Slug == "i-power" ? "i-power.png" :
+						                                     item.Slug == "i-connect" ? "i-connect.png" :
+						                                    "default.png"
+                                                             )" alt="@item.Title Logo" class="img - fluid">
+									                			</picture>
+
+
+
+														<ul id="dropDownverticalMenu" class="nav mt-5 drop-down-vertical-menus">
+															@foreach (var child in item.ChildPages)
+															{
+																<li class="tab-link" data-tab="@child.Title">
+																	<a href="#">
+																		@child.Title
+																	
+																	</a>
+
+																	<!-- Categories under each child -->
+																	@if (child.Categories?.Any() == true)
+																	{
+																		<ul class="nav submenus">
+																			@foreach (var cat in child.Categories)
+																			{
+																				<li>
+																					<a href="#">@cat.CategoryName </a>
+
+																					@*    <!-- Products under category -->
+                                                                                    @if (cat.Products?.Any() == true)
+                                                                                    {
+                                                                                        <ul>
+                                                                                            @foreach (var prod in cat.Products)
+                                                                                            {
+                                                                                                <li>
+                                                                                                    <a href="#">@prod.ProductName</a>
+                                                                                                </li>
+                                                                                            }
+                                                                                        </ul>
+                                                                                    } *@
+																				</li>
+																			}
+																		</ul>
+																	}
+																</li>
+															}
+														</ul>
+													</article>
+													<article class="hidden-box-curve"></article>
+													<a href="@Url.Action("ViewPage", "Page", new { slug = item.Slug })">
+														<i class="fa-solid fa-arrow-up-long"></i>
+													</a>
+												</article>
+											</article>
+
+											<!-- Right Side: Descriptive Content -->
+											<article class="col-md-8">
+
+
+
+												@foreach (var child in item.ChildPages)
+												{
+
+
+
+
+													<article class="right-navbar tab-content active" id="@child.Title">
+														<article class="right-navbar-top-content">
+															<h5>@child.Title</h5>
+															<p>@Html.Raw(child.PageContent)</p>
+
+															<a href="@Url.Action("ViewPage", "Page", new { slug = child.Slug })">
+																Read More
+															</a>
+															
+															@*  need to do this for inner page *@
+														</article>
+													
+
+														<article class="right-navbar-bottom-content">
+															<ul class="nav mt-5">
+																<li class="heading">
+																	<a href="@Url.Action("ViewCategoryList", "Page", new { id = child.PageId })">
+																		@child.Title
+																	</a>
+																</li>
+																@if (child.Categories?.Any() == true)
+																{
+																	@foreach (var cat in child.Categories)
+																	{
+																		@Html.Partial("Components/RenderMenu/_CategoryTree", cat)
+																	}
+																}
+															</ul>
+														</article>
+
+
+													</article>
+
+												}
+
+
+
+
+
+
+
+
+											</article>
+										</article>
+									</article>
+								</li>
+							}
+							else
+							{
+								<!-- Simple top-level menu item -->
+								if (item.IntopMenu == true)
+								{
+									<li class="nav-item">
+										<a class="nav-link" href="@Url.Action("ViewPage", "Page", new { slug = item.Slug })">
+											@item.Title
+										</a>
+									</li>
+								}
+							}
+						}
+
+					</ul>
+
+					<article class="d-flex align-items-center gap-3">
+						<article class="d-flex align-items-center gap-3 search bg-light p-2 rounded">
+							<i class="fa-solid fa-magnifying-glass search-icon"></i>
+							<input type="text" class="border-0 outline-none search-bar bg-transparent w-100"
+								   placeholder="Search">
+						</article>
+						<a href="@Url.Action("Contact", "Home")" class="contact-us-btn">Contact Us</a>
+					</article>
+				</article>
+			</div>
+		</div>
+	</nav>
+</article>

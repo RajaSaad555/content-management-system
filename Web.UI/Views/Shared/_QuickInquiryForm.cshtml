@@ -1,0 +1,102 @@
+﻿<section class="container form-container">
+    <figure class="form-left">
+        <picture>
+            <img src="~/assets/images/bg/contact-us.png" alt="Contact Form Image" class="img-fluid">
+        </picture>
+        <figcaption class="animate__animated animate__fadeInLeft animate__delay-2s">
+            <h3>Your Partner in <br /> Digital Growth</h3>
+            <p>We're here to answer your questions and provide the right solutions for your business.</p>
+        </figcaption>
+    </figure>
+
+@*     <form id="quickInquiryForm" onsubmit="submitQuickInquiry(event)">
+ *@      
+ <form asp-action="Submit" asp-controller="QuickInquiry" method="post">
+
+ @Html.AntiForgeryToken()
+
+        <h3 class="mb-3">Get in Touch With Us</h3>
+
+        <article class="form-content">
+            <input type="text" name="Name" placeholder="Name *" class="form-control" required />
+            <input type="email" name="Email" placeholder="Email Address *" class="form-control" required />
+            <input type="text" name="Phone" placeholder="Phone *" class="form-control" />
+            <input type="text" name="Company" placeholder="Company" class="form-control" />
+            <input type="text" name="CompanyName" placeholder="Company Name" class="form-control" />
+
+            <select name="TerritorySlot" class="form-select" required>
+                <option value="">Select Territory *</option>
+                <option value="UK">United Kingdom</option>
+                <option value="UAE">United Arab Emirates</option>
+                <option value="Europe">Europe</option>
+                <option value="Middle East">Middle East</option>
+                <option value="Asia">Asia</option>
+            </select>
+
+
+            <select name="Enquirytype" class="form-select" required>
+                <option value="">Select Enquiry Type *</option>
+                <option value="General Enquiry">General Enquiry</option>
+                <option value="Product Enquiry">Product Enquiry</option>
+                <option value="Support">Support</option>
+            </select>
+
+
+            <textarea name="Message" rows="3" class="form-control" placeholder="Message *" required></textarea>
+        </article>
+
+        <!-- ✅ Only one submit button -->
+        <button type="submit">Submit</button>
+
+
+        <div id="formResponse" class="mt-3"></div>
+    </form>
+</section>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <text>
+            Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '@TempData["SuccessMessage"]'
+            });
+        </text>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <text>
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: '@TempData["ErrorMessage"]'
+            });
+        </text>
+    }
+}
+<style>
+    /* All dropdowns same color as inputs */
+    select.form-select,
+    select.form-select option {
+        color: #666666; /* main text color */
+        font-family: inherit;
+        font-size: inherit;
+    }
+
+        /* Placeholder (first option) color */
+        select.form-select option:first-child {
+            color: #666666; /* placeholder color */
+        }
+
+        /* Optional: focus/hover style consistent */
+        select.form-select:focus {
+            border-color: #ced4da;
+            outline: none;
+            box-shadow: none;
+        }
+</style>

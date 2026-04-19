@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interconnect Solutions</title>
+    
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/css/aos.css">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="~/assets/images/favicon.ico">
+
+ </head>
+
+<body>
+
+    <!-- loader -->
+
+    <article id="loader" class="page-loader">
+        <div class="loader-circle-32">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </article>
+
+    <!-- loader -->
+    <!-- Navbar -->
+
+
+           @{
+
+        @await Component.InvokeAsync("RenderMenu")
+
+     
+           }
+
+
+
+    <!-- Navbar -->
+
+
+
+    @if (ViewBag.ShowSlider==true){
+
+        @await Component.InvokeAsync("SliderPartial")
+
+    }
+
+  
+    
+    @RenderBody()
+
+
+    <!-- footer -->
+    <!-- footer -->
+    <footer>
+        <article class="container">
+            <!-- Top Section: Description + Get in Touch -->
+            <article class="row">
+                <!-- Left: Description -->
+                <article class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <picture class="d-block mb-3">
+                        <img src="~/assets/images/site-logo-white.png" alt="site logo" class="img-fluid">
+                    </picture>
+                    <p class="fw-lighter small" style="line-height: 1.6;">
+                        Throughout the years, Interconnect solutions has evolved and grown to be the preferred network & power solutions provider for various industries. Since its birth in the year 2005, headquartered in the UK, Interconnect solutions has manged to position itself as an industry expert in the field of network infrastructure (Copper, Fibre, RF/wireless network) & Power back-up solutions.
+                    </p>
+                </article>
+
+                <!-- Get in Touch -->
+                <article class="col-md-5" data-aos="fade-up" data-aos-delay="600">
+                    <h5 class="mb-4">Get in Touch</h5>
+                    <article class="row">
+                        <!-- Divider -->
+                        <article class="col-12 d-flex justify-content-center my-3">
+                            <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                        </article>
+
+                        <!-- London -->
+                        <article class="col-6">
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-map-pin flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">47-49 Park Royal Road, Premier Business Center, London UK</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-phone flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">+44 20 8827 0567</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-fax flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">+44 20 8963 0343</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2">
+                                <i class="fa-solid fa-envelope flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">uk@i-sol.co.uk</p>
+                            </article>
+                        </article>
+
+                        <!-- Sharjah -->
+                        <article class="col-6">
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-map-pin flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">Q4-136, SAIF Zone, P.O. Box 9508, Sharjah, UAE.</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-phone flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">+971 6 557 9960</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2 mb-3">
+                                <i class="fa-solid fa-fax flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">+971 6 557 9961</p>
+                            </article>
+                            <article class="col-12 d-flex justify-content-center my-3">
+                                <div style="height: 1px; background: rgba(255,255,255,0.3); width: 100%;"></div>
+                            </article>
+                            <article class="d-flex gap-2">
+                                <i class="fa-solid fa-envelope flex-shrink-0" style="margin-top: 3px;"></i>
+                                <p class="mb-0 fw-lighter small">uae@i-sol.co.uk</p>
+                            </article>
+                        </article>
+                    </article>
+                </article>
+
+                <!-- Lets Connect -->
+                <article class="col-md-4" data-aos="fade-up" data-aos-delay="800">
+                    <h4 class="mb-4">Lets Connect</h4>
+@*                     <form class="d-flex flex-column gap-3 connect-form">
+ *@
+                    <form asp-action="SaveContact" asp-controller="Contact" method="post" class="d-flex flex-column gap-3 connect-form">
+                        @Html.AntiForgeryToken()
+                        <input type="text" name="Name" placeholder="Name" class="p-2 bg-transparent fw-lighter">
+                        <input type="text" name="Message" placeholder="Your Message" class="p-2 bg-transparent fw-lighter">
+                        <article class="d-flex align-items-center gap-2 email-input">
+                            <input type="email" name="Email" placeholder="Enter your Email address" class="p-2 bg-transparent flex-grow-1 fw-lighter">                            <i class="fa-regular fa-envelope"></i>
+                        </article>
+@*                         <button class="align-self-start">Submit <i class="fa-solid fa-arrow-up-long btn-icon"></i></button>
+ *@                        <button type="submit" class="align-self-start">
+                    </form>
+                </article>
+            </article>
+
+            <!-- Social Icons Section -->
+            <article class="row mt-3">
+                <article class="col-md-12">
+                    <ul class="list-unstyled d-flex align-items-center justify-content-center social-icons gap-2 mt-3">
+                        <li>
+                            <a href="https://www.facebook.com/" target="_blank" class="btn btn-outline-secondary rounded-circle">
+                                <i  class="fa-brands fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/" target="_blank" class="btn btn-outline-secondary rounded-circle">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/" target="_blank" class="btn btn-outline-secondary rounded-circle">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank" class="btn btn-outline-secondary rounded-circle">
+                                <i class="fa-brands fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </article>
+            </article>
+        </article>
+    </footer>
+
+    <!-- footer -->
+
+
+    <script src="~/assets/js/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/loader.js"></script>
+    <script src="~/assets/js/menu-tabs.js"></script>
+    <script src="~/assets/js/product-slider.js"></script>
+</body>
+
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".read-more-btn").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                let container = btn.closest(".right-navbar-top-content");
+                let extended = container.querySelector(".extended-desc");
+
+                if (extended.classList.contains("d-none")) {
+                    extended.classList.remove("d-none");
+                    btn.textContent = "Read Less";
+                } else {
+                    extended.classList.add("d-none");
+                    btn.textContent = "Read More";
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+     function submitQuickInquiry() {
+        debugger;
+        const form = document.getElementById("quickInquiryForm");
+        if (!form) {
+            console.error("Form not found!");
+            return;
+        }
+        event?.preventDefault();
+        const formData = new FormData(form);
+        const actionUrl = '/QuickInquiry/Submit';
+        try {
+            const response = fetch(actionUrl, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            });
+            console.log("Response received:", response.status);
+            const result = response;
+            console.log("Parsed result:", result);
+            if (result.success) {
+                console.log("Success! Showing alert...");
+                toastr.success(result.message, "Success!");
+                form.reset();
+                const modal = form.closest('.modal');
+                if (modal) {
+                    const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                    if (bootstrapModal) {
+                        bootstrapModal.hide();
+                    }
+                }
+            } else {
+                console.log("Validation failed:", result.message);
+                toastr.warning(result.message, "Validation Error");
+            }
+        } catch (error) {
+            console.error("Error submitting inquiry:", error);
+            toastr.error("Something went wrong while submitting your inquiry. Check console for details.", "Error");
+        }
+    }
+</script>

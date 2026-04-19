@@ -1,0 +1,213 @@
+﻿@* @model List< DataAccess.Model.Category> *@
+@model BusinessObject.ViewModel.CategoryViewModel
+@{
+	ViewBag.PageTitle = Model.PageData.Title;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!-- Breadcrumb -->
+
+<section class="container" style="visibility:hidden;">
+
+	<article class="row">
+
+		<div class="breadcrumb">
+
+			<a href="#">Home</a> <span>❯❯</span>
+
+			<span class="current">i-flex</span>
+
+		</div>
+
+	</article>
+
+</section>
+
+
+
+
+<!-- category-cards -->
+@Html.Raw(Model.PageData.ContentBody)
+
+@if (Model?.SubCategories != null && Model.SubCategories.Count > 0)
+{
+	<section class="container product-line-banner">
+		<div class="row justify-content-between">
+			<!-- Left Content -->
+
+			<article class="col-md-6">
+				<div class="banner-left">
+					<h1 class="animate__animated animate__fadeInUp animate__delay-1s">
+						RF Feeder <br /> Cables Built for Reliable <br /> Connectivity
+					</h1>
+				</div>
+			</article>
+			<!-- Right Content -->
+			<article class="col-md-5">
+				<article class="banner-right">
+					<article class="banner-card animate__animated animate__fadeInUp animate__delay-2s">
+						<h2>Radio Frequency Cables</h2>
+						<p>
+							RF (Radio Frequency) cables are specialized coaxial cables designed to transmit radio
+							frequency signals with minimal loss and maximum efficiency. They are essential components in
+							wireless communication systems, ensuring reliable signal transfer between antennas,
+							transmitters, and receivers.
+						</p>
+
+						<article class="banner-button-container">
+							<a href="Home/rf-cables" class="explore-button">
+								Explore Rf cables <i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</article>
+					</article>
+					<!-- <article class="empty-box"></article> -->
+					@* <picture class="banner-badge animate__animated animate__fadeInUp animate__delay-3s">
+						<img src="~/assets/images/client-logo-icons/i-flex.png" alt="i-flex logo" class="img-fluid" />
+					</picture> *@
+				</article>
+			</article>
+		</div>
+	</section>
+
+	<section class="container products">
+		<h2 class="section-title" data-aos="fade-up">Available Categories</h2>
+
+		<article class="products-container">
+			@foreach (var category in Model.SubCategories)
+			{
+				<figure class="product-card" data-aos="fade-up" data-aos-delay="300">
+					<picture>
+						<img src="@category.ImagePath" class="img-fluid" alt="@category.Title" />
+					</picture>
+					<figcaption>
+						<h4>@category.Title</h4>
+						<a href="@Url.Action("ViewCategoryList", "Page", new { id = category.CategoryID })">
+							Explore <i class="fa-solid fa-chevron-right"></i>
+						</a>
+					</figcaption>
+				</figure>
+			}
+		</article>
+	</section>
+
+}
+@if (Model?.Products != null && Model.Products.Count > 0)
+{
+	@Html.Raw(Model.PageData.ContentBody)
+
+	<section class="container product-line-banner">
+		<div class="row justify-content-between">
+			<!-- Left Content -->
+
+			<article class="col-md-6">
+				<div class="banner-left">
+					<h1 class="animate__animated animate__fadeInUp animate__delay-1s">
+						RF Feeder <br /> Cables Built for Reliable <br /> Connectivity
+					</h1>
+				</div>
+			</article>
+			<!-- Right Content -->
+			<article class="col-md-5">
+				<article class="banner-right">
+					<article class="banner-card animate__animated animate__fadeInUp animate__delay-2s">
+						<h2>Radio Frequency Cables</h2>
+						<p>
+							RF (Radio Frequency) cables are specialized coaxial cables designed to transmit radio
+							frequency signals with minimal loss and maximum efficiency. They are essential components in
+							wireless communication systems, ensuring reliable signal transfer between antennas,
+							transmitters, and receivers.
+						</p>
+
+						<article class="banner-button-container">
+							<a href="#" class="explore-button">
+								Explore Rf cables <i class="fa-solid fa-arrow-right"></i>
+							</a>
+						</article>
+					</article>
+					<!-- <article class="empty-box"></article> -->
+					<picture class="banner-badge animate__animated animate__fadeInUp animate__delay-3s">
+						<img src="~/assets/images/client-logo-icons/i-flex.png" alt="i-flex logo" class="img-fluid" />
+					</picture>
+				</article>
+			</article>
+		</div>
+	</section>
+
+
+
+	<section class="container products">
+ 		<h2 class="section-title aos-init aos-animate" data-aos="fade-up">Products in this category</h2>
+ 	
+		
+
+		
+
+
+
+
+ 
+ <article class="products-container">
+			@foreach (var product in Model.Products)
+			{
+				<a href="@Url.Action("ViewProductDetail", "Page", new { slug = product.Slug, id = product.ProductID })" style="text-decoration: none; color: inherit;">
+					<figure class="catogory-card text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+						<picture>
+							@{
+								var primaryImage = product.ProductImages.FirstOrDefault(x => x.IsPrimary);
+								var imageUrl = primaryImage?.ImageUrl ?? "/assets/images/default-product.png"; // fallback image
+							}
+
+							<img src="@imageUrl" class="img-fluid" alt="@product.ProductName" />
+						</picture>
+						<figcaption>
+							<h4 class="catogory-title">@product.ProductName</h4>
+						</figcaption>
+					</figure>
+				</a>
+			}
+		</article>
+	</section>
+}
+ @foreach (var category in Model.SubCategories)
+{
+	@if (category.Products.Count > 0)
+	{
+		<section class="container pb-5">
+			<div class="d-flex justify-content-between align-items-center mb-3">
+				<h4 class="mb-0">@category.Title</h4>
+				<div>
+					<button class="btn btn-sm btn-outline-dark me-2 prevBtn">‹</button>
+					<button class="btn btn-sm btn-outline-dark nextBtn">›</button>
+				</div>
+			</div>
+			<div class="carousel-container">
+				<div class="carousel-track" style="transform: translateX(0px);">
+					@foreach (var product in category.Products)
+					{
+						<div class="carousel-item-custom">
+							<figure class="product-card aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+								<picture>
+									@{
+										var primaryImage = product.ProductImages.FirstOrDefault(x => x.IsPrimary);
+										var imageUrl = primaryImage?.ImageUrl ?? "/assets/images/default-product.png"; // fallback image
+									}
+
+									<img src="@imageUrl" class="img-fluid" alt="@product.ProductName" />
+
+								</picture>
+								<figcaption>
+									<h4>@product.ProductName</h4>
+									<a href="@Url.Action("ViewProductDetail", "Page", new { slug = product.Slug, id = product.ProductID })">View Details <i class="fa-solid fa-chevron-right"></i></a>
+								</figcaption>
+							</figure>
+						</div>
+					}
+				</div>
+			</div>
+		</section>
+	}
+}  
+
+
+

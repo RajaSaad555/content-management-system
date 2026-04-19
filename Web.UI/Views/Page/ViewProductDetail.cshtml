@@ -1,0 +1,250 @@
+﻿@model BusinessObject.ViewModel.ProductDetailViewModel
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.PageTitle = Model.ProductName;
+	ViewBag.Pages = true;
+
+}
+
+
+<!-- Breadcrumb -->
+<article class="container" style="visibility:hidden;margin-bottom:30px">
+    <div class="breadcrumb"         >
+        <a href="index.html">Home</a> <span>&#10095;&#10095;</span>
+
+        <a href="@Model.">i-flex</a> <span>&#10095;&#10095;</span>
+        <a href="@Model.CMSPageID">Product Line</a> <span>&#10095;&#10095;</span>
+  <a href="/Page/ViewCMSPage/@Model.CMSPageID">Product Line</a>
+
+      
+ <a href="@Model.CategoryID">@Model.CategoryName</a> <span>&#10095;&#10095;</span>
+        <span class="@Model.ProductID">@Model.ProductName</span>
+    </div>
+</article>
+
+<article class="container" style="margin-top: 120px">
+    <article class="row product-detail">
+        <article class="col-md-6">
+            <article class="d-flex flex-column gap-5 product-content">
+				<h3>@Model.ProductName</h3>
+
+                <p>	@Model.ShortDescription</p>
+@* 
+				<button>Request a quote<i class="fa-solid fa-arrow-right"></i></button>
+              *@
+             
+
+
+
+                <a href="@Url.Action("RequestAQuote", "Home")" class="explore-button">
+                    <button class="explore-button">
+                        Request a quote <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </a>
+
+			</article>
+
+       
+		</article>
+		
+
+        <article class="col-md-6">
+            <article class="product-images">
+
+                @{
+                    // Get main image (prefer IsPrimary, fallback to first)
+                    var imageObject = Model.ImagesList?
+                    .FirstOrDefault(x => x.IsPrimary)
+                    ?? Model.ImagesList?.FirstOrDefault();
+
+                    var allImages = Model.ImagesList;
+                }
+
+                <!-- 🖼️ Main Product Image -->
+                <article class="product-main-image">
+                    <picture class="position-relative" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <img src="@(imageObject != null ? imageObject.ImageUrl : Url.Content("~/assets/images/no-image.png"))"
+                             alt="Main Product Image"
+                             class="img-fluid"
+                             id="main-product-image" />
+                        <span class="zoom-icon">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </span>
+                    </picture>
+
+                    <!-- Modal for full view -->
+                    <div class="modal fade product-view-modal" id="staticBackdrop"
+                         data-bs-backdrop="static" data-bs-keyboard="false"
+                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content bg-transparent border-0">
+                                <button type="button" class="btn text-white fs-2 text-end cross-btn"
+                                        data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="fa-regular fa-circle-xmark"></i>
+                                </button>
+
+                                <div class="modal-body product-images-view-modal">
+                                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            @if (allImages.Any())
+                                            {
+                                                var index = 0;
+                                                foreach (var img in allImages)
+                                                {
+                                                    <div class="carousel-item @(index == 0 ? "active" : "")">
+                                                        <picture>
+                                                            <img src="@img.ImageUrl"
+                                                                 alt="Main Product Image"
+                                                                 class="img-fluid" />
+                                                        </picture>
+                                                    </div>
+                                                    index++;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="carousel-item active">
+                                                    <img src="~/assets/images/no-image.png"
+                                                         alt="No Image Available"
+                                                         class="img-fluid" />
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#carouselExample" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                                data-bs-target="#carouselExample" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 🖼️ Sub Images -->
+                <article class="product-sub-images">
+                    @if (allImages.Any())
+                    {
+                        foreach (var item in allImages)
+                        {
+                            <picture id="sub-image">
+                                <img src="@item.ImageUrl"
+                                     alt="Main Product Image"
+                                     class="img-fluid"
+                                     onclick="document.getElementById('main-product-image').src='@item.ImageUrl';" />
+                            </picture>
+                        }
+                    }
+                    else
+                    {
+                        <picture id="sub-image">
+                            <img src="~/assets/images/no-image.png"
+                                 alt="No Image Available"
+                                 class="img-fluid" />
+                        </picture>
+                    }
+                </article>
+
+
+
+
+            </article>
+        </article>
+
+
+
+		
+            
+		</article>
+	</article>
+
+<article class="container product-features-tabs my-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black active" id="productinfo-tab" data-bs-toggle="tab"
+                    data-bs-target="#productinfo-tab-pane" type="button" role="tab" aria-controls="productinfo-tab-pane"
+                    aria-selected="true">
+                Product Info
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black" id="feature-tab" data-bs-toggle="tab"
+                    data-bs-target="#feature-tab-pane" type="button" role="tab" aria-controls="feature-tab-pane"
+                    aria-selected="false">
+                Features & Specifications
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black" id="application-tab" data-bs-toggle="tab"
+                    data-bs-target="#application-tab-pane" type="button" role="tab" aria-controls="application-tab-pane"
+                    aria-selected="false">
+                Applications
+            </button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+            <button class="nav-link text-black" id="download-tab" data-bs-toggle="tab"
+                    data-bs-target="#download-tab-pane" type="button" role="tab" aria-controls="download-tab-pane"
+                    aria-selected="false">
+                Documents & Downloads
+            </button>
+        </li>
+
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+
+        <div class="tab-pane fade border show active bg-white p-3" id="productinfo-tab-pane" role="tabpanel"
+             aria-labelledby="productinfo-tab" tabindex="0">
+            <article class="tab-heading d-flex justify-content-between align-items-center">
+                @Html.Raw(Model.FullDescription)
+            </article>
+        </div>
+
+        <div class="tab-pane fade border bg-white p-3" id="feature-tab-pane" role="tabpanel"
+             aria-labelledby="feature-tab" tabindex="0">
+            <article class="tab-heading d-flex justify-content-between align-items-center">
+                @Html.Raw(Model.Features)
+            </article>
+        </div>
+
+        <div class="tab-pane fade border bg-white p-3" id="application-tab-pane" role="tabpanel"
+             aria-labelledby="application-tab" tabindex="0">
+            @Html.Raw(Model.Application)
+        </div>
+
+        <div class="tab-pane fade border bg-white p-3" id="download-tab-pane" role="tabpanel"
+             aria-labelledby="download-tab" tabindex="0">
+            @Html.Raw(Model.Downloads)
+        </div>
+
+    </div>
+
+</article>
+
+
+
+<style>
+    #productinfo-tab
+    #productinfo-tab-pane p,
+    #feature-tab-pane p,
+    #application-tab-pane p {
+        font-size: 13px;
+        color: #444444;
+        font-family: 'Open Sans', Arial, sans-serif;
+        line-height: 1.6;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>

@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "errorpage";
+
+
+    ViewBag.ShowSlider = false;
+}
+
+
+    <!-- Error section -->
+    <section class="error-page">
+        <div class="error-content">
+            <h2 class="error-code">404</h2>
+            <h2 class="error-title">Page Not Found</h2>
+            <p class="error-text">
+                The page you’re looking for isn’t available. Try another page or use the<br> home button below.
+            </p>
+        <a href="https://localhost:44368/Index" class="home-btn">Go To Home Page <i class="fa-solid fa-arrow-up-long btn-icon"></i></a>
+        </div>
+    </section>
+
+    <script src="./assets/js/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/loader.js"></script>
+    <script src="./assets/js/menu-tabs.js"></script>

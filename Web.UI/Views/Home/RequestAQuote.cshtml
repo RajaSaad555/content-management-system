@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Contact";
+    ViewBag.ShowSlider = false;
+}
+
+<link href="~/assets/css/main.css" rel="stylesheet" />
+@await Html.PartialAsync("~/Views/Shared/_QuickInquiryForm.cshtml")
+
+
+<section class="container my-5">
+    <h2 class="text-center pb-5" data-aos="fade-up">Our Global Presence in Network & Power Infrastructure</h2>
+
+    <article class="row justify-content-between align-items-center gap-3 global-presence">
+        <article class="col-md-3 top-right" data-aos="fade-right" data-aos-delay="500">
+            <article class="curved-box">
+                <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+                <h4>UK Office</h4>
+                <p>
+                    47-49 Park Royal Road, Premier Business Center, London NW10 7LQ, England, UK.<br />
+                    Tel: +44 20 8827 0567 <br />
+                    Fax: +44 20 8963 0343 <br />
+                    E-mail: uk@i-sol.co.uk
+                </p>
+            </article>
+            <article class="empty-box"></article>
+        </article>
+
+        <article class="col-md-5" data-aos="fade-down">
+            <img src="~/assets/images/map.png" alt="Map" class="img-fluid">
+        </article>
+
+        <article class="col-md-3 top-left" data-aos="fade-left" data-aos-delay="500">
+            <article class="curved-box text-end">
+                <span class="icon"><i class="fa-solid fa-location-dot"></i></span>
+                <h4>UAE Office</h4>
+                <p>
+                    Q4-136, SAIF Zone, P.O. Box 9508, Sharjah, UAE.<br />
+                    Tel: +971 6 557 9960 <br />
+                    Fax: +971 6 557 9961 <br />
+                    E-mail: uae@i-sol.co.uk
+                </p>
+            </article>
+            <article class="empty-box"></article>
+        </article>
+    </article>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // ✅ Show success alert
+    @if (TempData["SuccessMessage"] != null)
+    {
+            <text>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '@TempData["SuccessMessage"]'
+            });
+            </text>
+    }
+
+    // ✅ Show error alert
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <text>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '@TempData["ErrorMessage"]'
+            });
+            </text>
+    }
+</script>
+
+
+
+

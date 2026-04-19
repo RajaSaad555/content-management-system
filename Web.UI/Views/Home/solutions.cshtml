@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; ViewBag.Title = "Contact";
+
+
+    ViewBag.ShowSlider = false;
+}
+
+<link href="~/assets/css/main.css" rel="stylesheet" />
+
+<section class="container container-layout solution-container">
+    <article class="d-flex align-items-center justify-content-between first-row-content">
+        
+        <h1 data-aos="fade-up">Innovative Network & <br /> Power Solutions</h1>
+
+     @*    <article class="action-button d-flex justify-content-end gap-3 flex-grow-1" data-aos="fade-up"
+                 data-aos-delay="300">
+            <a href="@Url.Action("About", "Home")" class="explore-btn">Explore Our Story <i class="fa-solid fa-arrow-up-long btn-icon"></i></a>
+            <a href="@Url.Action("Solutions", "Home")" class="discover-btn">Discover Solutions <i class="fa-solid fa-arrow-up-long btn-icon"></i></a>
+        </article> *@
+    </article>
+
+    <article class="second-row-content mt-5">
+        <article data-aos="zoom-in" data-aos-delay="300">
+            <p>
+                Interconnect Solutions has a long-standing tradition of working with its customers to develop an
+                extensive range of services for its innovative product portfolio. From planning complex projects, to
+                installing and operating networks, to training your staff, Interconnect Solutions is always there to
+                support you.
+            </p>
+        </article>
+        <article class="images-container">
+            <picture>
+                <img src="~/assets/images/solutions/network-and-power-small.jpg" alt="People with laptop image"
+                     data-aos="zoom-in" data-aos-delay="500" />
+            </picture>
+            <picture>
+                <img src="~/assets/images/solutions/network-and-power-big.jpg" alt="People with laptop image"
+                     data-aos="zoom-in" data-aos-delay="300" />
+            </picture>
+        </article>
+
+    </article>
+</section>
+
+<section class="container my-5">
+    <h2 class="text-center">Our Solutions</h2>
+
+    <article class="solution-product-cards-container mt-5">
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/project-planning.jpg" alt="project planning image"
+                     class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>Project Planning and Management</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/installaion-and-commissioning.jpg"
+                     alt="Installation and Commissioning image">
+
+            </picture>
+
+            <figcaption>
+                <h3>Installation and Commissioning</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/help-inactive.jpg" alt="Help in activating Networks image"
+                     class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>Help in activating Networks</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/operating-networks.jpg"
+                     alt="Support in Operating Networks image" class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>Support in Operating Networks</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/rf-building.jpg" alt="RF in Building Design Services image"
+                     class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>RF in Building Design Services</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/site-survey.jpg" alt="Site Survey image" class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>Site Survey</h3>
+            </figcaption>
+        </figure>
+        <figure class="solution-card">
+            <picture class="card-img">
+                <img src="~/assets/images/solutions/cabling.jpg" alt="Structured Cabling Layout and Design image"
+                     class="img-fluid">
+
+            </picture>
+
+            <figcaption>
+                <h3>Structured Cabling Layout and Design</h3>
+            </figcaption>
+        </figure>
+    </article>
+</section>

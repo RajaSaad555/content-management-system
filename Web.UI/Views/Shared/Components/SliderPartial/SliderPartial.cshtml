@@ -1,0 +1,173 @@
+﻿@* @model List<DataAccess.Model.Slider>
+
+
+
+
+
+
+    <!-- Carousel Section -->
+    <section id="heroCarousel" class="carousel slide carousel-fade home-page-carousal" data-bs-ride="carousel"
+             data-bs-interval="4000">
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="banner-content container text-white">
+                    <h1 class="animate__animated animate__fadeInDown animate__delay-1s">
+                        Empowering Industries <br /> with Network Infrastructure <br /> & Power Solutions
+                    </h1>
+                    <p class="animate__animated animate__fadeInDown animate__delay-2s">
+                        From reliable network infrastructure to smart power systems, we deliver solutions <br />
+                        that help your business connect, scale, and succeed.
+                    </p>
+
+                    <div class="d-flex flex-column align-items-start gap-3">
+                        <div class="d-flex gap-5">
+                            <div class="animate__animated animate__zoomIn animate__delay-3s">
+                                <h3>1000+</h3>
+                                <h4 class="fw-light fs-6">Network <br /> Solutions <br /> Delivered</h4>
+                            </div>
+                            <div class="animate__animated animate__zoomIn animate__delay-4s">
+                                <h3>300+</h3>
+                                <h4>Enterprises <br /> Connected</h4>
+                            </div>
+                        </div>
+
+                        <a href="contact-us.html"
+                           class="get-in-touch-btn animate__animated animate__zoomIn animate__delay-5s">
+                            Get in touch <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="banner-content container text-white">
+                    <h1 class="animate__animated animate__fadeInDown animate__delay-1s">
+                        Empowering Industries <br /> with Network Infrastructure <br /> & Power Solutions
+                    </h1>
+                    <p class="animate__animated animate__fadeInDown animate__delay-2s">
+                        From reliable network infrastructure to smart power systems, we deliver solutions <br />
+                        that help your business connect, scale, and succeed.
+                    </p>
+
+                    <div class="d-flex flex-column align-items-start gap-3">
+                        <div class="d-flex gap-5">
+                            <div class="animate__animated animate__zoomIn animate__delay-3s">
+                                <h3>1000+</h3>
+                                <h4 class="fw-light fs-6">Network <br /> Solutions <br /> Delivered</h4>
+                            </div>
+                            <div class="animate__animated animate__zoomIn animate__delay-4s">
+                                <h3>300+</h3>
+                                <h4>Enterprises <br /> Connected</h4>
+                            </div>
+                        </div>
+
+                        <a href="contact-us.html"
+                           class="get-in-touch-btn animate__animated animate__zoomIn animate__delay-5s">
+                            Get in touch <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="banner-content container text-white">
+                    <h1 class="animate__animated animate__fadeInDown animate__delay-1s">
+                        Empowering Industries <br /> with Network Infrastructure <br /> & Power Solutions
+                    </h1>
+                    <p class="animate__animated animate__fadeInDown animate__delay-2s">
+                        From reliable network infrastructure to smart power systems, we deliver solutions <br />
+                        that help your business connect, scale, and succeed.
+                    </p>
+
+                    <div class="d-flex flex-column align-items-start gap-3">
+                        <div class="d-flex gap-5">
+                            <div class="animate__animated animate__zoomIn animate__delay-3s">
+                                <h3>1000+</h3>
+                                <h4 class="fw-light fs-6">Network <br /> Solutions <br /> Delivered</h4>
+                            </div>
+                            <div class="animate__animated animate__zoomIn animate__delay-4s">
+                                <h3>300+</h3>
+                                <h4>Enterprises <br /> Connected</h4>
+                            </div>
+                        </div>
+
+                        <a href="contact-us.html"
+                           class="get-in-touch-btn animate__animated animate__zoomIn animate__delay-5s">
+                            Get in touch <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    *@
+
+@model List<DataAccess.Model.Slider>
+
+<section id="heroCarousel" class="carousel slide carousel-fade home-page-carousal" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-inner">
+        @if (Model != null && Model.Any())
+        {
+            var first = true;
+            foreach (var slider in Model.Where(s => s.IsActive == true).OrderBy(s => s.SliderPosition))
+            {
+                <div class="carousel-item @(first ? "active" : "")">
+                    <div class="banner-content container text-white">
+                        <h1 class="animate__animated animate__fadeInDown animate__delay-1s">
+                            @Html.Raw(slider.SliderHeadingText)
+                        </h1>
+                        <p class="animate__animated animate__fadeInDown animate__delay-2s">
+                            @Html.Raw(slider.SliderDescriptionText)
+
+                        </p>
+
+                        <div class="d-flex flex-column align-items-start gap-3">
+                            <div class="d-flex gap-5">
+                                <div class="animate__animated animate__zoomIn animate__delay-3s">
+                                    <h3>1000+</h3>
+                                    <h4 class="fw-light fs-6">Network <br /> Solutions <br /> Delivered</h4>
+                                </div>
+                                <div class="animate__animated animate__zoomIn animate__delay-4s">
+                                    <h3>300+</h3>
+                                    <h4>Enterprises <br /> Connected</h4>
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(slider.SliderLink))
+                            {
+                                <a href="@($"/Home/{slider.SliderLink}")"
+                                   class="get-in-touch-btn animate__animated animate__zoomIn animate__delay-5s">
+                                    Get in touch <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                first = false;
+            }
+        }
+        else
+        {
+            <div class="carousel-item active">
+                <div class="banner-content container text-white">
+                    <h1>No sliders available</h1>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+</section>
+
+
+<style>
+
+</style>

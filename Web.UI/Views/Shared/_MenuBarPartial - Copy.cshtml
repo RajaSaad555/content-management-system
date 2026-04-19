@@ -1,0 +1,587 @@
+﻿@model List<BusinessObject.ViewModel.MenuItemViewModel>
+
+<article id="navbar" class="navbar-container">
+    <nav class="navbar navbar-expand-lg bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand site-logo px-3 " href="index.html">
+                <img src="~/assets/images/site-logo.png" alt="Site Logo" class="img-fluid">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse position-relative" id="navbarNavDropdown">
+                <article class="navbar-content w-100">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+@*                             <a class="nav-link " aria-current="page" href="index.html">home</a>
+ *@                         <a class="nav-link" aria-current="page" href="@Url.Action("Index", "Home")">Home</a>
+
+
+                        </li>
+
+
+
+                        <li class="nav-item nav-with-dropdown">
+                            <a class="nav-link ">i-flex
+                                <i class="fa-solid fa-angle-down"></i>
+
+                            </a>
+
+                            <article class="container dropdown-custom-container bg-white">
+                                <article class="row align-items-stretch">
+                                    <article class="col-md-4 left-navbar">
+                                        <article class="left-navbar-content">
+                                            <article class="curved-box-content">
+                                                <picture class="iflex-logo">
+                                                    <img src="~/assets/images/client-logo-icons/i-flex.png"
+                                                         alt="I-flex logo" class="img-fluid">
+                                                </picture>
+
+                                                <ul id="dropDownverticalMenu" class="nav mt-5 drop-down-vertical-menus">
+                                                   
+                                                    <li class="tab-link" data-tab="product-line">
+                                                        <a href="#">
+                                                            Product line
+
+                                                            <span class="drop-down-icon">
+                                                                <i class="fa-solid fa-angle-right"></i>
+                                                            </span>
+                                                        </a>
+
+                                                        <ul class="nav submenus">
+                                                            <li><a href="#">RF cables</a></li>
+                                                            <li><a href="#">RF combiners</a></li>
+                                                            <li><a href="#">RF antenna</a></li>
+                                                            <li><a href="#">Tower accessories</a></li>
+                                                            <li><a href="#">POI (point of interface)</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="tab-link" data-tab="our-solutions">
+                                                        <a href="#">
+                                                            Our Solutions
+
+                                                            <span class="drop-down-icon">
+                                                                <i class="fa-solid fa-angle-right"></i>
+                                                            </span>
+                                                        </a>
+
+                                                        <ul class="nav submenus">
+                                                            <li><a href="#">In-Train DAS</a></li>
+                                                            <li><a href="#">Health Care DAS</a></li>
+                                                            <li><a href="#">Hospitality DAS</a></li>
+                                                            <li><a href="#">Shopping Mall DAS</a></li>
+                                                            <li><a href="#">Stadium DAS</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="tab-link" data-tab="catalogue">
+                                                        <a href="#">
+                                                            Catalogue
+
+                                                            <article class="d-flex gap-3 align-items-center">
+                                                                <span><i class="fa-solid fa-download"></i></span>
+                                                                <span class="drop-down-icon">
+                                                                    <i class="fa-solid fa-angle-right"></i>
+                                                                </span>
+                                                            </article>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                            <article class="hidden-box-curve"></article>
+                                            <a href="@Url.Action("IFlex", "Home")><i class="fa-solid fa-arrow-up-long"></i></a>
+                                        </article>
+                                    </article>
+                                    <article class="col-md-8 ">
+                                        <article class="right-navbar tab-content active" id="i-flex">
+                                            <article class="right-navbar-top-content">
+                                                <h5>i-flex</h5>
+                                                <p>
+                                                    i-flex is a leading brand of Interconnect Solutions, which
+                                                    provides
+                                                    the most advanced passive RF Distributed Antenna System
+                                                    (DAS)
+                                                    for
+                                                    in-building coverage as well as RF passive products for
+                                                    Telecom
+                                                    outdoor solutions.
+                                                </p>
+
+                                                <button>Read More</button>
+                                            </article>
+
+                                            <article class="right-navbar-bottom-content">
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Product Line</a></li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Cables
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Combiners
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Antenna
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Tower Accessories
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            POI (Point of Interface)
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Our Solutions</a></li>
+                                                    <li>
+                                                        <a href="">
+                                                            In - Train DA
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Healthcare DAS
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Hospitality DAS
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Shopping Mall DAS
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Stadium DAS
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Catalogue</a></li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Cables
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Combiners
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            RF Antenna
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Tower Accessories
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            POI (Point of Interface)
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </article>
+                                        </article>
+                                        <article class="right-navbar tab-content" id="product-line">
+                                            <article class="right-navbar-top-content">
+                                                <h5>Product line</h5>
+                                                <p>
+                                                    Discover our comprehensive range of RF and i-Flex solutions,
+                                                    designed to deliver reliable connectivity, optimized
+                                                    performance, and seamless integration across your network.
+                                                </p>
+
+                                                <button>Read More</button>
+                                            </article>
+
+                                            <article class="right-navbar-bottom-content ">
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">RF Cables</a></li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            RF Feeder Cable
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            RF Adapters
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            RF Attenuators
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            RF Termination Loads
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Cavity Power Splitters
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            High Power Directional Couplers
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">RF Combiners</a></li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            3db Hybrid Coupler
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            4x4 Hybrid Matrix
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Diplexer & Twin Diplexer
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Triplexer & Twin Triplexer
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Quadplexer & Twin Quadplexer
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">RF Antenna</a></li>
+                                                    <li class="heading">
+                                                        <a href="">POI (Point of interface)</a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Tower Accessories</a></li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Grounding Kit
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Cable clamps
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Cable Entry System
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            Hoisting Grips
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+
+                                                            PON Network Management
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </article>
+                                        <article class="right-navbar tab-content " id="our-solutions">
+                                            <article class="right-navbar-top-content">
+                                                <h5>Our Solutions</h5>
+                                                <p>
+                                                    i-flex is uniquely positioned to help you in transforming,
+                                                    organizing and growing your network / business. We act as
+                                                    your
+                                                    partner, with unprecedented knowledge about products and
+                                                    services to help you to execute profitably.
+                                                </p>
+
+                                                <button>Read More</button>
+                                            </article>
+
+                                            <article class="right-navbar-bottom-content cutomiz-grid-system">
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">In-Train DAS</a></li>
+                                                    <li> Analog Wide Band Pico Repeater</li>
+                                                    <li> Digital Repeater (51 dB)</li>
+                                                    <li> Analog Triple Band Pico Repeater</li>
+                                                    <li> Digital Repeater (42 dB)</li>
+                                                    <li> Dual Band RF Combiner</li>
+                                                    <li> 1/2” Flexible RF Cable</li>
+                                                    <li> Train Antenna</li>
+                                                    <li> Omnidirectional Antenna</li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Health Care DAS</a></li>
+                                                    <li> 1/2” Flexible RF Cable</li>
+                                                    <li> Triplexer</li>
+                                                    <li> Power Splitters</li>
+                                                    <li> Directional Couplers</li>
+                                                    <li> Termination Loads</li>
+                                                    <li> RF Jumper Cable</li>
+                                                    <li>
+                                                        Omnidirectional Wide Band MIMO Smart Antenna</a>
+                                                    </li>
+                                                    <li> Directional MIMO Antenna</li>
+                                                    <li> Omnidirectional Antenna</li>
+                                                    <li> Directional Antenna</li>
+                                                    <li> 7/8” Low Loss RF Cable</li>
+                                                    <li> Point of interface (POI)</li>
+                                                    <li> Power Splitters</li>
+                                                    <li> Directional Couplers</li>
+                                                    <li> Termination Loads</li>
+                                                    <li> Omnidirectional Antenna</li>
+                                                    <li> Omnidirectional Wide Band MIMO Smart Antenna</a>
+                                                    <li>
+                                                        Directional Antenna</a>
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Hospitality DAS</a></li>
+                                                    <li> 1-5/8” Flexible RF Cable</li>
+                                                    <li> RF Connectors</li>
+                                                    <li>
+                                                        Power Splitters
+                                                    </li>
+                                                    <li>
+                                                        Directional Couplers
+                                                    </li>
+                                                    <li>
+                                                        Termination Loads
+                                                    </li>
+                                                    <li>
+                                                        RF Jumper Cables
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Omnidirectional Wide Band MIMO Smart
+                                                            Antenna
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        Omnidirectional Antenna
+                                                    </li>
+                                                    <li>
+                                                        1/2” Super Flexible RF Cable
+                                                    </li>
+                                                    <li>
+                                                        RF Connectors
+                                                    </li>
+                                                    <li>
+                                                        RF Adaptors
+                                                    </li>
+                                                    <li>
+                                                        Quadplexer
+                                                    </li>
+                                                    <li>
+                                                        4x4 Hybrid Matrix
+                                                    </li>
+                                                    <li>
+                                                        Power Splitters
+                                                    </li>
+                                                    <li>
+                                                        Directional Couplers
+                                                    </li>
+                                                    <li>
+                                                        Termination Loads
+                                                    </li>
+                                                    <li>
+                                                        RF Jumper Cables
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Omnidirectional Wide Band MIMO Smart
+                                                            Antenna
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        Omnidirectional Antenna
+                                                    </li>
+                                                    <li>
+                                                        Directional Antenna
+                                                    </li>
+                                                    <li>
+                                                        Directional MIMO Antenna
+                                                    </li>
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Shopping Mall DAS</a></li>
+                                                    <li>
+                                                        1/2” Flexible RF Cable LSZH
+                                                    </li>
+                                                    <li>
+                                                        7/8” Rf Low Loss Cable LSZH
+                                                    </li>
+                                                    <li>
+                                                        RF Connectors
+                                                    </li>
+                                                    <li>
+                                                        RF Adaptors
+                                                    </li>
+                                                    <li>
+                                                        Triplexer
+                                                    </li>
+                                                    <li>
+                                                        4x4 Hybrid Matrix
+                                                    </li>
+                                                    <li>
+                                                        <a href="">Power Splitters</a>
+                                                    </li>
+                                                    <li>
+                                                        Directional Couplers
+                                                    </li>
+                                                    <li>
+                                                        Termination Loads
+                                                    </li>
+                                                    <li>
+                                                        RF Jumper Cables
+                                                    </li>
+                                                    <li>
+                                                        <a href="">
+                                                            Omnidirectional Wide Band MIMO Smart
+                                                            Antenna
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        Directional MIMO Antenna
+                                                    </li>
+                                                    <li>
+                                                        Omnidirectional Antenna
+                                                    </li>
+                                                    <li>
+                                                        Directional Antenna
+                                                    </li>
+                                                    <li>
+                                                        Directional Ultra-Thin Antenna
+                                                    </li>
+                                                    <li>
+                                                        Accessories
+                                                    </li>
+
+                                                </ul>
+                                                <ul class="nav mt-5">
+                                                    <li class="heading"><a href="">Stadium DAS</a></li>
+                                                    <li>
+                                                        1/2” Super Flexible RF Cable
+                                                    </li>
+                                                    <li>
+                                                        7/8” Flexible RF Cable
+                                                    </li>
+                                                    <li>
+                                                        Quadplexer
+                                                    </li>
+                                                    <li>
+                                                        Power Splitters
+                                                    </li>
+                                                    <li>
+                                                        Directional Couplers
+                                                    </li>
+                                                    <li>
+                                                        Termination Loads
+                                                    </li>
+                                                    <li>
+                                                        <a href="">RF Jumper Cable</a>
+                                                    </li>
+                                                    <li>
+                                                        Directional Wide Band MIMO Antenna 30
+                                                    </li>
+                                                    <li>
+                                                        Directional Wide Band MIMO Antenna 60
+                                                    </li>
+                                                    <li>
+                                                        Directional Antenna
+                                                    </li>
+                                                    <li>
+                                                        RF Connectors and Adaptors
+                                                    </li>
+                                                    <li>
+                                                        Accessories
+                                                    </li>
+                                                </ul>
+                                            </article>
+                                        </article>
+                                        <article class="right-navbar tab-content" id="catalogue">Tab 3</article>
+                                    </article>
+                                </article>
+                            </article>
+
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" >i-connect
+
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" >i-power
+
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Solutions", "Home")">Solutions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Events", "Home")">News Centre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Career", "Home")">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">partners</a>
+                        </li>
+                    </ul>
+
+                    <article class="d-flex align-items-center gap-3">
+                        <article class="d-flex align-items-center gap-3 search bg-light p-2 rounded">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" class="border-0 outline-none search-bar bg-transparent w-100"
+                                   placeholder="Search">
+                        </article>
+                        <a href="@Url.Action("Contact", "Home")" class="contact-us-btn">Contact Us</a>
+                    </article>
+                </article>
+            </div>
+        </div>
+    </nav>
+</article>

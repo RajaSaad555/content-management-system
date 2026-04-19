@@ -1,0 +1,78 @@
+﻿@model BusinessObject.ViewModel.CategoryNameViewModel
+
+@if (Model != null)
+{
+	<div class="accordion" id="accordion-@Model.CategoryID">
+		@if (Model.SubCategories != null && Model.SubCategories.Any())
+		{
+			@foreach (var subCategory in Model.SubCategories)
+			{
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="heading-@subCategory.CategoryID">
+						<button class="accordion-button collapsed"
+								type="button"
+								data-bs-toggle="collapse"
+								data-bs-target="#collapse-@subCategory.CategoryID"
+								aria-expanded="false"
+								aria-controls="collapse-@subCategory.CategoryID">
+							@subCategory.CategoryName
+						</button>
+					</h2>
+					<div id="collapse-@subCategory.CategoryID"
+						 class="accordion-collapse collapse"
+						 data-bs-parent="#accordion-@Model.CategoryID">
+						<div class="accordion-body">
+
+							<!-- Products under this SubCategory -->
+							@if (subCategory.Products != null && subCategory.Products.Any())
+							{
+								<ul class="accordion-body">
+									@foreach (var product in subCategory.Products)
+									{
+										<li>
+											<a href="@Url.Action("ViewProductDetail", "Page", new { slug = product.Slug, id = product.ProductID })">
+												@product.ProductName
+											</a>
+
+											@* <a href="@Url.Action("ViewProductDetail", "Page", new { id = product.ProductID })">
+												@product.ProductName
+											</a> *@
+										</li>
+									}
+								</ul>
+							}
+
+							<!-- Recursive call for deeper SubCategories -->
+							@if (subCategory.SubCategories != null && subCategory.SubCategories.Any())
+							{
+								@Html.Partial("Components/RenderMenu/_CategoryTree", subCategory)
+							}
+
+						</div>
+					</div>
+				</div>
+			}
+		}
+		else
+		{
+			<!-- No SubCategories, show Products -->
+			@if (Model.Products != null && Model.Products.Any())
+			{
+				<ul class="accordion-body">
+					@foreach (var product in Model.Products)
+					{
+						<li>
+							<a href="@Url.Action("ViewProductDetail", "Page", new { slug = product.Slug, id = product.ProductID })">
+								@product.ProductName
+							</a>
+							@* <a href="@Url.Action("ViewProductDetail", "Page", new { id = product.ProductID })">
+								@product.ProductName
+							</a> *@
+						</li>
+					}
+				</ul>
+			}
+		}
+	</div>
+}
+

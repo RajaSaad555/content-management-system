@@ -1,0 +1,165 @@
+﻿@model BusinessObject.ViewModel.PageViewModel
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.PageTitle = Model?.PageData?.Title ?? "Untitled Page";
+	ViewBag.Pages = true;
+	ViewBag.PageTitle = Model?.PageData?.Title ?? "Untitled Page";
+
+	if (Model?.PageData?.Title == "Home")
+	{
+		ViewBag.ShowSlider = true;
+	}
+
+}
+
+
+
+
+
+@if (Model?.PageData?.Title == "Blog")
+{
+
+
+
+
+	@Html.Raw(@Model.PageData.ContentBody)
+
+
+	<section class="blogs-section">
+		<div class="container">
+			<h2 class="section-title">Blogs & Insights</h2>
+
+			<!-- Blog Tab Content -->
+			<div class="tab-content" id="nav-tabContent">
+				<!-- All Blogs -->
+				<div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+					<section>
+						<div class="featured-blog">
+
+							@foreach (var item in Model.ListBlogPost
+													.OrderByDescending(b => b.CreatedAt) // or whatever property indicates date
+													.Take(1))
+													{
+								<article class="blog-card" data-aos="fade-up" data-aos-delay="300">
+									<div class="blog-content">
+										<span class="blog-date">@item.CreatedAt, @item.CreatedBy</span>
+										<h3>@item.Title</h3>
+
+
+										
+
+                                    <p>
+											@item.MetaKeywordDescription
+                                    </p>
+
+									@* 	<a href="@Url.Action("ViewBlog", "Page", new { slug = item.Slug, id = item.Id })">
+											CONTINUE READING <i class="fa-solid fa-arrow-up-long btn-icon"></i>
+										</a> *@
+
+
+
+										<button class="explore-btn" onclick="location.href='@Url.Action("ViewBlog", "Page", new { slug = item.Slug, id = item.Id })'">
+											Continue Reading <i class="fa-solid fa-arrow-up-long btn-icon"></i>
+										</button>
+
+								@* 	<a href="@Url.Action("ViewBlog", "Page", new { slug = item.Slug, id = item.Id })">
+										CONTINUE READING <i class="fa-solid fa-arrow-up-long btn-icon"></i>
+									</a> *@
+
+                                </div>
+                                <div class="blog-image">
+										<img src="~/Uploads/@item.OgImagePath" alt="@item.OgImageAlt" />
+                                </div>
+                            </article>}
+                        </div>
+
+						<!-- Blog Grid -->
+						<div class="blogs-grid">
+
+
+							@foreach (var item in Model.ListBlogPost
+													.OrderByDescending(b => b.CreatedAt)
+													.Skip(1))
+
+								{
+									<article class="blog-card" data-aos="fade-up" data-aos-delay="600">
+									<div class="blog-image">
+										<img src="~/Uploads/@item.OgImagePath" alt="@item.OgImageAlt" />
+									</div>
+
+									<div class="blog-content">
+										<h4>@item.Title</h4>
+										<p>
+											@item.MetaKeywordDescription
+										</p>
+										@* <a href="@Url.Action("ViewBlog", "Page", new { slug = item.Slug, id = item.Id })">
+											CONTINUE READING <i class="fa-solid fa-arrow-up-long btn-icon"></i>
+										</a>
+ *@
+
+										<a href="@Url.Action("ViewBlog", "Page", new { slug = item.Slug, id = item.Id })"
+										  >
+											CONTINUE READING <i class="fa-solid fa-arrow-up-long btn-icon"></i>
+										</a>
+
+									</div>
+								</article>
+							}
+
+
+
+
+						</div>
+					</section>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="tab-pane fade" id="nav-cat1" role="tabpanel" aria-labelledby="nav-cat1-tab">
+                    Category 1 blogs
+                </div>
+                <div class="tab-pane fade" id="nav-cat2" role="tabpanel" aria-labelledby="nav-cat2-tab">
+                    Category 2 blogs
+                </div>
+                <div class="tab-pane fade" id="nav-cat3" role="tabpanel" aria-labelledby="nav-cat3-tab">
+                    Category 3 blogs
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+}
+else
+{
+
+
+
+	@Html.Raw(Model?.PageData?.ContentBody)
+	@if (Model?.Categories != null && Model.Categories.Count > 0)
+	{
+		<section class="container products">
+			<h2 class="section-title aos-init aos-animate" data-aos="fade-up">Available Categories</h2>
+			<article class="products-container">
+				@foreach (var category in Model.Categories)
+				{
+					<a href="@Url.Action("ViewCategoryList", "Page", new { id = category.CategoryID })" style="text-decoration: none; color: inherit;">
+						<figure class="catogory-card text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+							<picture>
+								<img src="@category.ImagePath" class="img-fluid" alt="@category.Title">
+							</picture>
+							<figcaption>
+								<h4 class="catogory-title">@category.Title</h4>
+							</figcaption>
+						</figure>	
+					</a>
+				}
+			</article>
+		</section>
+	}
+
+
+}
