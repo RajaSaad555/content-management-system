@@ -1,4 +1,4 @@
-<img width="1347" height="638" alt="1" src="https://github.com/user-attachments/assets/5e9e2795-7843-4860-817a-f4aae11d4fe7" />
+
 # ⚡ Interconnect Solutions — Content Management System
 
 A full-featured **Content Management System** built with **ASP.NET MVC** for managing the complete digital presence of **Interconnect Solutions** — powering brands like **i-flex**, **i-connect**, and **i-power** across product lines including RF Cables, UPS Systems, LAN Solutions, and more.
