@@ -3,6 +3,12 @@
 A full-featured **Content Management System** built with **ASP.NET MVC** for managing the complete digital presence of **Interconnect Solutions** — powering brands like **i-flex**, **i-connect**, and **i-power** across product lines including RF Cables, UPS Systems, LAN Solutions, and more.
 
 Every aspect of the website — products, categories, pages, blogs, sliders, and inquiries — is fully manageable through a dedicated **Admin Panel**, with no coding required.
+---
+
+## 🔒 Code Access
+
+> **Note:** Due to a confidentiality agreement, the full source code is not publicly available in this repository.
+> To review the code, feel free to reach out via the **comments section** or contact directly on GitHub.
 
 ---
 
@@ -123,12 +129,6 @@ content-management-system/
 | Database | SQL Server |
 | Architecture | 3-Layer (Presentation, Business, Data) |
 
----
-
-## 🔒 Code Access
-
-> **Note:** Due to a confidentiality agreement, the full source code is not publicly available in this repository.
-> To review the code, feel free to reach out via the **comments section** or contact directly on GitHub.
 
 ---
 
