@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+@import "./mixins.scss";
+@import "./theme.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: "Manrope", sans-serif;
+    background: $backgroundColor;
+
+    h1 {
+      font-size: 60px;
+      font-weight: 400;
+
+      @media (max-width: $tablets) {
+        font-size: 30px;
+      }
+    }
+
+    h2 {
+      font-size: 59px;
+    }
+
+    h3 {
+      font-size: 35px;
+    }
+
+    h4 {
+      font-size: 22.38px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $darkTextColor;
+    }
+
+    .container-layout {
+      margin-top: 100px;
+
+      @media (max-width: $mediumDevices) {
+        margin-top: 80px;
+        text-align: center;
+      }
+
+      .first-row-content {
+        @media (max-width: $mediumDevices) {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .action-button {
+          max-width: 430px;
+          width: 100%;
+
+          @media (max-width: $mediumDevices) {
+            flex-direction: column;
+            max-width: 100%;
+            width: 100%;
+          }
+
+          a {
+            @include button();
+            @include flexbox($gap: 14px);
+
+            .btn-icon {
+              transform: rotate(45deg);
+            }
+          }
+
+          .discover-btn {
+            @include button(false);
+          }
+        }
+      }
+
+      .second-row-content {
+        @include gridbox($columns: 1fr 2fr, $gap: 100px);
+
+        @media (max-width: $mediumDevices) {
+          margin-top: 80px !important;
+        }
+
+        p {
+          a {
+            color: $primaryColor;
+          }
+        }
+
+        .images-container {
+          @include gridbox($columns: 1fr 2fr, $gap: 30px);
+
+          picture {
+            display: block;
+            overflow: hidden;
+            width: 100%;
+            height: 350px;
+            border-radius: 30px;
+
+            &:first-of-type {
+              height: 280px;
+            }
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center;
+            }
+          }
+        }
+      }
+    }
+
+    .product-card {
+      background: $lightTextColor;
+      border-radius: 10px;
+      padding: 25px 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid $borderColor;
+      transition: transform 0.3s ease;
+
+      cursor: pointer;
+
+      &:hover {
+        picture {
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      picture {
+        @include flexbox();
+
+        overflow: hidden;
+
+        img {
+          height: 90px;
+          object-fit: contain;
+          transition: 0.3s all linear;
+        }
+      }
+
+      figcaption {
+        padding-top: 40px;
+
+        h4 {
+          font-size: 15px;
+          color: $darkTextColor;
+          font-weight: 400;
+
+          @media (max-width: $smallDevices) {
+            font-size: 16px;
+          }
+        }
+
+        a {
+          @include flexbox($gap: 10px, $justify: flex-start);
+
+          font-size: 14px;
+          color: $primaryColor;
+          font-weight: 600;
+          text-decoration: none;
+
+          span {
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+
+    .catogory-card {
+      @extend .product-card;
+
+      height: 190px;
+      padding: 15px 20px;
+
+      figcaption {
+        h4 {
+          color: $primaryColor;
+          font-weight: 600;
+        }
+      }
+    }
+
+    footer {
+      padding: 50px 20px;
+      background: $darkTextColor;
+      color: $lightTextColor;
+
+      .footer-content {
+        @include gridbox(
+          $columns: 2fr 1.5fr repeat(4, 1fr),
+          $gap: 30px,
+          $align: flex-start
+        );
+
+        p,
+        a {
+          font-size: 14px;
+          color: $lightTextColor;
+          text-decoration: none;
+          text-align: justify;
+        }
+      }
+
+      .social-icons {
+        button {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .connect-form {
+        input {
+          border: none;
+          border-bottom: 1px solid rgb(68, 68, 68);
+          outline: none;
+          color: $primaryColor;
+        }
+
+        .email-input {
+          border-bottom: 1px solid rgb(68, 68, 68);
+
+          input {
+            border-bottom: none;
+          }
+
+          i {
+            color: $primaryColor;
+          }
+        }
+
+        button {
+          @include button;
+          @include flexbox($gap: 10px);
+
+          width: fit-content;
+          float: right !important;
+          margin-top: 20px;
+
+          i {
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+  }
+}

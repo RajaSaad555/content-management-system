@@ -1,0 +1,156 @@
+@import "./theme.scss";
+
+@mixin flexbox($align: center, $justify: center, $gap: "", $direction: "") {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+  flex-direction: $direction;
+
+  @media (max-width: $mediumDevices) {
+    @if $direction != "" {
+      flex-direction: column;
+    }
+  }
+}
+
+@mixin gridbox(
+  $columns: 1fr 1fr,
+  $rows: "",
+  $align: center,
+  $justify: center,
+  $gap: ""
+) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+
+  @media (max-width: $mediumDevices) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin position(
+  $position: null,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null,
+  $transform: null,
+  $zIndex: null
+) {
+  @if $position != null {
+    position: $position;
+  }
+  @if $top != null {
+    top: $top;
+  }
+  @if $right != null {
+    right: $right;
+  }
+  @if $bottom != null {
+    bottom: $bottom;
+  }
+  @if $left != null {
+    left: $left;
+  }
+  @if $transform != null {
+    transform: $transform;
+  }
+  @if $zIndex != null {
+    z-index: $zIndex;
+  }
+}
+
+@mixin button($is-primary: true) {
+  // common styles
+  border-radius: 50px;
+  padding: 7px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  // conditional styling
+  @if $is-primary == true {
+    background: $primaryColor;
+    color: $darkTextColor;
+  } @else {
+    background: $darkTextColor;
+    color: $primaryColor;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+@mixin banner($img, $boxBg) {
+  background: url($img) center/cover no-repeat; // Replace with actual bg
+  border-radius: 20px;
+  padding: 50px;
+  color: $lightTextColor;
+
+  .iflex-container {
+    @include gridbox($columns: 1.2fr 0.8fr, $gap: 30px, $align: center);
+  }
+
+  .banner-left {
+    h1 {
+      color: $lightTextColor;
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1.3;
+
+      @media (max-width: $tablets) {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .banner-right {
+    position: relative;
+
+    .banner-card {
+      background: url($boxBg) no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+      padding: 60px;
+      width: fit-content;
+
+      h2 {
+        color: $lightTextColor;
+        margin-bottom: 15px;
+        font-size: 44px;
+
+        @media (max-width: $mediumDevices) {
+          font-size: 30px;
+        }
+      }
+
+      p {
+        color: $lightTextColor;
+        line-height: 1.6;
+      }
+    }
+
+    .banner-badge {
+      @include position($position: absolute, $top: -10px, $right: -10px);
+      @include flexbox();
+
+      background: $primaryColor;
+      color: $darkTextColor;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      padding: 15px;
+
+      span {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}

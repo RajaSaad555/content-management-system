@@ -1,0 +1,288 @@
+@import "./gloabal.scss";
+@import "./theme.scss";
+@import "./mixins.scss";
+@import "./loader.scss";
+
+// Breadcrumb
+// ====================
+.breadcrumb {
+  color: $grayColor;
+  margin: 50px auto;
+  max-width: 1200px;
+
+  a {
+    color: $darkTextColor;
+    text-decoration: none;
+  }
+
+  .current {
+    color: $primaryColor;
+  }
+
+  span {
+    margin: 0 0.4rem;
+  }
+  @media (max-width: $tablets) {
+    ul {
+      gap: 5px;
+
+      li {
+        font-size: 12px;
+
+        &:not(:last-child)::after {
+          margin: 0 4px;
+        }
+      }
+    }
+  }
+}
+
+// ====================
+// About Section
+// ====================
+
+.iflex-section {
+  background: url("../images/Product-line/PL-tv.png") center/cover no-repeat; // Replace with actual bg
+  border-radius: 20px;
+  padding: 50px;
+  margin: 10px auto;
+  max-width: 1200px;
+  color: $lightTextColor;
+
+  .iflex-container {
+    @include gridbox($columns: 1.2fr 0.8fr, $gap: 30px, $align: center);
+    padding: 2rem;
+  }
+
+  .iflex-left {
+    h1 {
+      color: $lightTextColor;
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1.5;
+
+      @media (max-width: $tablets) {
+        font-size: 26px;
+      }
+    }
+  }
+
+  .iflex-right {
+    .iflex-card {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      h3 {
+        color: $lightTextColor;
+        margin-bottom: 15px;
+        font-size: 24px;
+      }
+
+      p {
+        color: $lightTextColor;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .iflex-badge {
+        @include position($position: absolute, $top: -20px, $right: -20px);
+
+        background: $primaryColor;
+        color: $darkTextColor;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+
+        @include flexbox();
+
+        span {
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+      .primary-btn {
+        @include button(true);
+        margin-top: 1rem;
+        margin-left: 8rem;
+      }
+    }
+  }
+}
+
+//product
+
+.iflex-products-section {
+  padding: 60px 40px;
+  background: $backgroundColor;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  .iflex-products-header {
+    @include flexbox($justify: space-between, $align: center);
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+
+    h1 {
+      font-size: 50px;
+      font-weight: 500;
+      color: $darkTextColor;
+      line-height: 1.3;
+
+      @media (max-width: $tablets) {
+        font-size: 28px;
+      }
+    }
+
+    .iflex-buttons {
+      @include flexbox($gap: 15px);
+
+      .primary-btn {
+        @include button(true);
+      }
+
+      .secondary-btn {
+        @include button(false);
+      }
+    }
+  }
+
+  .iflex-products-container {
+    @include gridbox($columns: 1fr 2fr, $gap: 30px, $align: start);
+
+    @media (max-width: $mediumDevices) {
+      grid-template-columns: 1fr;
+    }
+
+    .iflex-products-text {
+      p {
+        font-size: 15px;
+        color: $darkTextColor;
+        line-height: 1.7;
+        margin-top: 4rem;
+      }
+    }
+
+    .iflex-products-images {
+      // display: grid;
+      // grid-template-columns: repeat(2, 1fr); // 2 images side by side
+      // gap: 20px;
+      @include gridbox($columns: 1fr 1fr, $gap: 30px);
+
+      .image-wrapper {
+        width: 100%;
+        aspect-ratio: 1 / 1; // ensures square images
+        border-radius: 15px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      }
+
+      /* On tablets and below → stack images */
+      @media (max-width: $mediumDevices) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+
+//product-cards
+
+.product-line-section {
+  padding: 60px 20px;
+  background: $backgroundColor;
+  text-align: center;
+  border: 2px solid $primaryColor;
+
+  .section-title {
+    color: $darkTextColor;
+    font-size: 45px;
+    font-weight: 600;
+    margin-bottom: 50px;
+
+    @media (max-width: $mediumDevices) {
+      font-size: 32px;
+    }
+
+    @media (max-width: $smallDevices) {
+      font-size: 24px;
+    }
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 0 20px;
+
+    @media (max-width: $largeDevices) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    @media (max-width: $mediumDevices) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: $smallDevices) {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 25px 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid $borderColor;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      h4 {
+        font-size: 18px;
+        color: $darkTextColor;
+        margin-bottom: 12px;
+
+        @media (max-width: $smallDevices) {
+          font-size: 16px;
+        }
+      }
+
+      a {
+        font-size: 14px;
+        color: $primaryColor;
+        font-weight: 600;
+        text-decoration: none;
+
+        span {
+          margin-left: 5px;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        @media (max-width: $smallDevices) {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
