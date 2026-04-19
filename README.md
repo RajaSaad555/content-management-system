@@ -1,4 +1,4 @@
-
+<img width="1346" height="636" alt="7" src="https://github.com/user-attachments/assets/7d4b5688-3cb7-4b6f-b327-93e17a9a28b1" />
 # ⚡ Interconnect Solutions — Content Management System
 
 A full-featured **Content Management System** built with **ASP.NET MVC** for managing the complete digital presence of **Interconnect Solutions** — powering brands like **i-flex**, **i-connect**, and **i-power** across product lines including RF Cables, UPS Systems, LAN Solutions, and more.
@@ -29,21 +29,22 @@ Real-time overview of all content — Posts, Pages, Categories, Authors, and Inq
 ### Page Management
 Create and manage all website pages with parent-child relationships and inner page support.
 
-![Page List](screenshots/2.png)
+<img width="1353" height="627" alt="2" src="https://github.com/user-attachments/assets/65044865-1906-45fd-bb28-5104e0a739a0" />
+
 
 ---
 
 ### Product Categories
 Full hierarchical category system — **Brand → Category → Subcategory → Sub-subcategory** — each with its own image.
 
-![Product Categories](screenshots/3.png)
+<img width="1342" height="630" alt="3" src="https://github.com/user-attachments/assets/01ab5336-176e-4ab8-b2b7-bb93b6cbaa15" />
 
 ---
 
 ### Product Management
 Add, edit, and delete products with images, rich descriptions (Summernote editor), and category assignment.
 
-![Manage Products](screenshots/4.png)
+<img width="1353" height="637" alt="4" src="https://github.com/user-attachments/assets/f10abcf1-fd41-43c3-bb7d-f314dfa05d4e" />
 
 ---
 
@@ -52,23 +53,24 @@ Add, edit, and delete products with images, rich descriptions (Summernote editor
 ### Brand Navigation with Mega Menu
 Each brand (i-flex, i-connect, i-power) has a rich dropdown mega menu showing product lines, subcategories, and catalogues — all driven from the CMS.
 
-![i-flex Mega Menu](screenshots/5.png)
-![i-flex Product Line](screenshots/6.png)
-![i-power UPS Menu](screenshots/8.png)
+<img width="1350" height="642" alt="8" src="https://github.com/user-attachments/assets/a0b9df69-0119-4ca7-9d78-7a2ceada1ae7" />
+<img width="1345" height="635" alt="6" src="https://github.com/user-attachments/assets/f0dec499-3f40-4e89-af9d-9082ca9c7a00" />
+<img width="1342" height="637" alt="5" src="https://github.com/user-attachments/assets/70e03cbd-2dd6-4878-8c6b-508d00879df0" />
+
 
 ---
 
 ### Product Detail Pages
 Rich product pages with full descriptions, multiple images, tabbed sections (Product Info, Features & Specifications, Applications, Documents & Downloads), and a "Request a Quote" CTA.
 
-![Product Detail - RF Leaky Cable](screenshots/7.png)
+<img width="1346" height="636" alt="7" src="https://github.com/user-attachments/assets/f5ee968c-08bf-4625-af1e-451df26b5585" />
 
 ---
 
 ### Blog & Insights
 Blog listing and detail pages managed entirely from the admin panel — with categories, authors, and dates.
 
-![Blog & Insights](screenshots/9.png)
+<img width="1346" height="636" alt="9" src="https://github.com/user-attachments/assets/416be13c-2766-4cba-94bb-39b094783771" />
 
 ---
 
