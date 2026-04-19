@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BusinessObject.ViewModel.ProductViewModel>
+@{
+    ViewBag.PageTitle = "Products";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Pages = true;
+}
+<!-- Page Content -->
+<h1 class="h3 d-inline">@ViewBag.PageTitle</h1>
+<a href="@Url.Action("Create", "Product", new { area = "Admin" })" class="btn btn-primary align-top btn-sm">
+    <i class="fa fa-list"></i> Add new
+</a>
+<hr />
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table id="pagesTable" class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Picture</th>
+                        <th>Product Name</th>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ImagePath))
+                                {
+                                    // Check if ImagePath already starts with / (full path) or just filename
+                                    var imagePath = item.ImagePath.StartsWith("/") ?
+                                    Url.Content("~" + item.ImagePath) :
+                                    Url.Content("~/uploads/products/" + item.ImagePath);
+
+                                    <img src="@imagePath"
+                                         alt="Product Image" width="60" height="60" />
+                                }
+                                else
+                                {
+                                    <p>no img </p>
+                                }
+                            </td>
+                            <td>@item.ProductName</td>
+                            <td>@item.CategoryName</td>
+
+                            <td>
+                                <a href="@Url.Action("EditProduct", "Product", new { area = "Admin", id = item.ProductID })"
+                                   class="text-success">
+                                    Edit
+                                </a>
+                                -
+                                <a href="@Url.Action("DeleteProduct", "Product", new { area = "Admin", id = item.ProductID })"
+                                   class="text-danger"
+                                   onclick="return confirmDelete()">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap 5 CSS + JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables Bootstrap 5 CSS + JS -->
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#pagesTable').DataTable();
+        });
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this product?');
+        }
+    </script>
+}

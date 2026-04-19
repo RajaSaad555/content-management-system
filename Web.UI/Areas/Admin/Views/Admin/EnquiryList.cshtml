@@ -1,0 +1,95 @@
+﻿@model List<DataAccess.Model.QuickInquiry>
+
+@{
+	ViewBag.PageTitle = "Enquiry List !";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+	ViewBag.Options = true;
+}
+
+<h1 class="h3">@ViewBag.PageTitle</h1>
+<hr />
+
+<div class="row mb-3">
+	<div class="col-12">
+
+		<div class="table-responsive">
+			<table id="pagesTable" class="table table-bordered table-hover">
+				<thead class="thead-light">
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Phone</th>
+						<th>Technology Group</th>
+						<th>Message</th>
+						<th>Created At</th>
+					</tr>
+				</thead>
+				<tbody>
+					@if (Model != null && Model.Any())
+					{
+						foreach (var item in Model)
+						{
+							<tr>
+								<td>@item.Name</td>
+								<td>@item.Email</td>
+								<td>@item.Phone</td>
+								<td>@item.TerritorySlot</td>
+								<td>@item.Message</td>
+								<td>@item.CreatedDate?.ToString("yyyy-MM-dd")</td>
+							</tr>
+						}
+					}
+					else
+					{
+						<tr>
+							<td colspan="6">No enquiries found.</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+@section Scripts {
+
+
+
+
+	<!-- ✅ jQuery -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<!-- ✅ DataTables Bootstrap 5 CSS + JS -->
+	<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+
+
+
+		  $(document).ready(function () {
+			$('#pagesTable').DataTable({
+				searching: true,   // ✅ only search bar enabled
+				paging: false,     // keep pagination off
+				ordering: false,   // keep sorting off
+				info: false,       // hide "Showing x of y entries"
+				language: {
+					search: "Search Products:" // Search label
+				}
+			});
+		});
+
+
+	</script>
+
+}

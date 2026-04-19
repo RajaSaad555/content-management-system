@@ -1,0 +1,446 @@
+﻿@using BusinessObject.ViewModel
+
+@model ProductDetailViewModel
+
+@{
+	//ViewBag.PageTitle = "Edit Product";
+//	ViewBag.PageTitle = Html.Raw(" Edit  Product <i class='fas fa-hand-point-right'></i> " + Model.ProductName);
+    ViewBag.PageTitle = Model.ProductName;
+
+
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+	ViewBag.Pages = true;
+}
+
+
+@section Head {
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+	<link rel="icon" type="image/x-icon" href="~/assets/images/favicon.ico">
+	<link rel="stylesheet" href="~/assets/css/main.css">
+}
+@if (TempData["SuccessMessage"] != null)
+{
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+		@TempData["SuccessMessage"]
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+		@TempData["ErrorMessage"]
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+}
+
+
+@using (Html.BeginForm("EditProduct", "Product", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "novalidate" }))
+{
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(m => m.ProductID)
+
+	<article class="product-tabs-container py-3">
+		<h4 class="fw-bold mb-4">Edit Product</h4>
+		<hr />
+
+		<nav>
+			<div class="nav nav-tabs" id="nav-tab" role="tablist">
+				<button class="nav-link text-black product-tab active" id="nav-home-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+						aria-selected="true">
+					Product Info
+				</button>
+				<button class="nav-link text-black " id="nav-seo-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-seo" type="button" role="tab" aria-controls="nav-seo"
+						aria-selected="true">
+					SEO
+				</button>
+				<button class="nav-link text-black " id="nav-features-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-features" type="button" role="tab" aria-controls="nav-features"
+						aria-selected="true">
+					Features
+				</button>
+				<button class="nav-link text-black" id="nav-application-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-application" type="button" role="tab" aria-controls="nav-profile"
+						aria-selected="false">
+					Application
+				</button>
+				@* <button class="nav-link text-black" id="nav-Specification-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-Specification" type="button" role="tab" aria-controls="nav-contact"
+                        aria-selected="false">
+                    Specification
+                </button> *@
+				<button class="nav-link text-black" id="nav-download-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-download" type="button" role="tab" aria-controls="nav-disabled"
+						aria-selected="false">
+					Downloads
+				</button>
+				<button class="nav-link text-black" id="nav-pictures-tab" data-bs-toggle="tab"
+						data-bs-target="#nav-pictures" type="button" role="tab" aria-controls="nav-pictures"
+						aria-selected="true">
+					Pictures
+				</button>
+			</div>
+		</nav>
+
+		<div class="tab-content bg-white" id="nav-tabContent">
+			<div class="tab-pane fade product-tab-content show active" id="nav-home" role="tabpanel"
+				 aria-labelledby="nav-home-tab" tabindex="0">
+				<article class="row mb-4 p-4">
+					@* <h4 class="fw-bold mb-4"> Product Info</h4> *@
+
+				@* 	<div class="col-md-6 mb-3">
+						<label asp-for="CMSPageID" class="form-label fw-bold">Select Page</label>
+						<select asp-for="CMSPageID" class="form-select">
+							<option value="">-- Selected Page --</option>
+							@foreach (var pageData in Model.ListOfPages)
+							{
+								<option value="@pageData.Id" @(pageData.Id == Model.CMSPageID ? "selected" : "")>@pageData.Title</option>
+							}
+						</select>
+						@Html.ValidationMessageFor(m => m.CMSPageID, "", new { @class = "text-danger" })
+
+					</div> *@
+
+					<div class="form-group col-6">
+						<label for="CMSPageID">Select CMS Page</label>
+						@Html.DropDownListFor(
+						m => m.CMSPageID,
+										(List<SelectListItem>)ViewBag.CmsPages,
+										new { @class = "form-control" }
+										)
+				</div>
+
+
+
+
+
+					<!-- Select Category -->
+				@* 	<div class="col-md-6 mb-3">
+						<label asp-for="CategoryID" class="form-label fw-bold">Select Category</label>
+						<select asp-for="CategoryID" id="CategoryID" name="CategoryID" class="form-select">
+							<option value="">-- Selected Category --</option>
+							@foreach (var cat in Model.ListOfCategories)
+							{
+								<option value="@cat.CategoryID" @(cat.CategoryID == Model.CategoryID ? "selected" : "")>@cat.CategoryName</option>
+							}
+						</select>
+						@Html.ValidationMessageFor(m => m.CategoryID, "", new { @class = "text-danger" })
+
+					</div>
+ *@
+				<div class="form-group col-md-6">
+					@Html.LabelFor(model => model.CategoryID, "Select Category", new { @class = "fw-bold" })
+					@Html.DropDownListFor(
+										model => model.CategoryID,
+										new SelectList(ViewBag.ParentCategories as List<ProductCategoryViewModel>, "CategoryID", "CategoryName", Model.CategoryID),
+										"-- Select Category --",
+										new { @class = "form-control" }
+										)
+				</div>
+
+
+
+
+
+
+				</article>
+
+				<hr>
+				<article class="row my-4 p-4">
+					<div class="col-md-6 mb-3">
+						<label for="ProductName" class="form-label fw-bold">Product Name</label>
+						@Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", placeholder = "Enter product name" })
+						@Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+					</div>
+
+
+					<div class="col-md-6 mb-3">
+						<label for="Slug" class="form-label fw-bold">Product Slug (Friendly Name)</label>
+						@Html.TextBoxFor(m => m.Slug, new { @class = "form-control", placeholder = "Enter Slug name" })
+						@Html.ValidationMessageFor(m => m.Slug, "", new { @class = "text-danger" })
+					</div>
+
+
+					<!-- Short Description -->
+					<div class="mb-3">
+						<label for="ShortDescription" class="form-label fw-bold">Short Description</label>
+						@Html.TextAreaFor(m => m.ShortDescription, new { @class = "form-control", rows = 5 })
+						@Html.ValidationMessageFor(m => m.ShortDescription, "", new { @class = "text-danger" })
+					</div>
+
+
+
+
+					<!-- Full Description with Quill -->
+					<div class="mb-3">
+						<label for="FullDescription" class="form-label fw-bold">Full Description</label>
+						@*    @Html.TextAreaFor(m => m.FullDescription, new { @id = "FullDescription", @hidden = "hidden" }) *@
+
+
+
+						<div class="editor" style="height:unset">
+
+							@Html.TextAreaFor(model => model.FullDescription, new { @class = "form-control summernote" })
+
+						</div>
+						@Html.ValidationMessageFor(m => m.FullDescription, "", new { @class = "text-danger" })
+					</div>
+			</div>
+
+
+
+			<div class="tab-pane fade product-tab-content" id="nav-seo" role="tabpanel"
+				 aria-labelledby="nav-seo-tab" tabindex="0">
+				<article class="row my-4 p-4 ">
+					<article class=" col-md-12 mb-3 form-input">
+						<label for="MetaTitle" class="form-label fw-bold d-block">Meta Title</label>
+						<input type="text" class="form-control" id="MetaTitle"
+							   placeholder="Meta Title">
+
+					</article>
+					<article class=" col-md-12 mb-3 form-input">
+						<label for="MetaKeyWord" class="form-label fw-bold d-block">Meta Keyword</label>
+						<input type="text" class="form-control" id="MetaKeyWord"
+							   placeholder="Meta Keywords">
+
+					</article>
+					<article class=" col-md-12 mb-3 form-input">
+						<label for="metDescription" class="form-label fw-bold d-block">Meta Keyword Description</label>
+						<input type="text" class="form-control" id="metDescription"
+							   placeholder="Enter Meta Description">
+
+					</article>
+					<article class=" col-md-12 mb-3 form-input">
+						<label for="searchName" class="form-label fw-bold d-block">Friendly Page Name</label>
+						<input type="text" class="form-control" id="searchName"
+							   placeholder="Friendly Page Name">
+
+					</article>
+
+				</article>
+			</div>
+
+			<div class="tab-pane fade product-tab-content" id="nav-features" role="tabpanel"
+				 aria-labelledby="nav-features-tab" tabindex="0">
+				<article class="row my-4 p-4 ">
+					<article class=" col-md-12 mb-3 form-input">
+						<label for="Feature" class="form-label fw-bold d-block">Feature Description</label>
+						@*               @Html.TextAreaFor(m => m.Features, new { @class = "form-control", rows = 5 }) *@
+
+						@Html.TextAreaFor(model => model.Features, new { @rows = 5, @class = "form-control summernote" })
+
+					</article>
+					@*    <article class="col-md-12 mb-3">
+                    <label for="productName" class="form-label fw-bold d-block">Short Description</label>
+                    <textarea name="" id="" class="form-control" rows="5"></textarea>
+                </article> *@
+
+				</article>
+			</div>
+
+			<div class="tab-pane fade product-tab-content" id="nav-application" role="tabpanel"
+				 aria-labelledby="nav-application-tab" tabindex="0">
+				<article class="col-md-12 my-4 p-4 ">
+					<label for="Application" class="form-label fw-bold">Application</label>
+					@*     @Html.TextAreaFor(m => m.Application, new { @class = "form-control", rows = 5 }) *@
+
+					@Html.TextAreaFor(model => model.Application, new { @rows = 5, @class = "form-control summernote" })
+
+				</article>
+			</div>
+
+
+			<div class="tab-pane fade product-tab-content" id="nav-download" role="tabpanel"
+				 aria-labelledby="nav-download-tab" tabindex="0">
+				<article class="col-md-12 my-4 p-4 ">
+					<label for="Downloads" class="form-label fw-bold">Full Downloads</label>
+
+					@Html.TextAreaFor(model => model.Downloads, new { @rows = 5, @class = "form-control summernote" })
+
+					@*         @Html.TextAreaFor(m => m.Downloads, new { @class = "form-control", rows = 3 }) *@
+					<div id="editor-3">
+					</div>
+				</article>
+			</div>
+		<div class="tab-pane fade product-tab-content" id="nav-pictures" role="tabpanel"
+			 aria-labelledby="nav-pictures-tab" tabindex="0">
+
+			<article class="p-4 upload-image-section">
+				<h4 class="fw-bold pb-5">Upload Product Image</h4>
+
+				<!-- File input (any file can be selected, but only images will be saved) -->
+				<label for="AllImages" class="image-uploader rounded-3 text-center p-5">
+					<h4>Click to upload Image</h4>
+					<p>Only images up to 400KB will be saved</p>
+					<input type="file" name="AllImages" asp-for="AllImages" id="editFileUpload"
+						   class="form-control" multiple />
+					<span asp-validation-for="AllImages" class="text-danger"></span>
+				</label>
+
+				@Html.HiddenFor(m => m.PrimaryImage, new { id = "PrimaryImageHidden" })
+
+				<article class="py-3">
+					<h5 class="fs-6 fw-semibold">Uploaded Images</h5>
+					@if (Model.ImagesList != null && Model.ImagesList.Any())
+						{
+							foreach (var img in Model.ImagesList)
+							{
+								<figure id="image-@img.ImageID" class="uploaded-images d-flex align-items-center justify-content-between mb-3">
+									<picture>
+										<img src="@Url.Content(img.ImageUrl)" alt="Product Image" class="img-fluid rounded-3" style="max-width:120px; height:auto;" />
+									</picture>
+
+									<figcaption class="d-flex align-items-center justify-content-between gap-5 w-100 ps-3">
+										<div class="form-check">
+											<input class="form-check-input border-secondary primary-image-radio"
+												   type="radio"
+												   name="PrimaryImageRadio"
+												   value="@img.ImageID"
+												   @(img.IsPrimary ? "checked" : "") />
+											<label class="form-check-label">Make Default</label>
+										</div>
+
+										<article class="d-flex gap-2">
+											<button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteImage(@img.ImageID)">
+												<i class="fa-solid fa-xmark"></i>
+											</button>
+										</article>
+									</figcaption>
+								</figure>
+							}
+						}
+						else
+						{
+							<p class="text-muted">No images uploaded yet.</p>
+						}
+					</article>
+				</article>
+			</div>
+
+		</div>
+	</article>
+
+	<button type="submit" class="btn btn-primary">Update Product</button>
+	<a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="btn btn-secondary">Cancel</a>
+}
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			// Summernote
+			$('.summernote').summernote({
+				height: 300,
+				toolbar: [
+					['style', ['bold', 'italic', 'underline', 'clear']],
+					['para', ['ul', 'ol', 'paragraph']],
+					['insert', ['link', 'picture']],
+					['view', ['fullscreen', 'codeview']]
+				]
+			});
+
+			// Primary image radio
+			$(document).on('change', '.primary-image-radio', function () {
+				$('#PrimaryImageHidden').val($(this).val());
+			});
+
+			// Remove preview image
+			$(document).on('click', '.remove-btn', function () {
+				$(this).closest('figure').remove();
+			});
+		});
+
+		// Delete image from server
+		function deleteImage(imageId) {
+			if (!confirm("Are you sure you want to delete this image?")) return;
+
+			$.ajax({
+				url: '/Admin/Product/DeleteProductImage',
+				type: 'POST',
+				data: { imageId: imageId },
+				success: function (response) {
+					if (response.success) {
+						$('#image-' + imageId).fadeOut(400, function () { $(this).remove(); });
+					} else {
+						alert("Failed to delete image.");
+					}
+				},
+				error: function () {
+					alert("An error occurred while deleting the image.");
+				}
+			});
+		}
+
+		// Preview and validate Edit Images
+		const editFileUpload = document.getElementById('editFileUpload');
+		const editPreviewContainer = document.getElementById('previewContainer');
+
+		if (editFileUpload) {
+			editFileUpload.addEventListener('change', function () {
+				editPreviewContainer.innerHTML = ''; // clear previous previews
+				const validFiles = [];
+
+				Array.from(this.files).forEach(file => {
+					// Only images
+					if (!file.type.startsWith('image/')) {
+						console.warn(`${file.name} is not an image.`);
+						return;
+					}
+
+					// Limit size to 400KB
+					if (file.size > 400 * 1024) {
+						alert(`${file.name} exceeds 400KB and will be ignored.`);
+						return;
+					}
+
+					validFiles.push(file);
+
+					// Preview image
+					const reader = new FileReader();
+					reader.onload = function (e) {
+						const figure = document.createElement('figure');
+						figure.className = "uploaded-images d-flex align-items-center justify-content-between mb-2";
+
+						figure.innerHTML = `
+							<picture>
+								<img src="${e.target.result}" class="img-fluid rounded-3" style="max-width:120px; height:auto;" />
+							</picture>
+							<figcaption class="d-flex align-items-center justify-content-between gap-5 w-100 ps-3">
+								<div class="form-check">
+									<input class="form-check-input primary-image-radio" type="radio" name="PrimaryImageRadio" value="${validFiles.length - 1}">
+									<label class="form-check-label">Make Default</label>
+								</div>
+								<article class="d-flex gap-2">
+									<button type="button" class="btn btn-outline-danger btn-sm remove-btn">
+										<i class="fa-solid fa-xmark"></i>
+									</button>
+								</article>
+							</figcaption>
+						`;
+						editPreviewContainer.appendChild(figure);
+					};
+					reader.readAsDataURL(file);
+				});
+
+				// Keep only valid files in input
+				if (validFiles.length !== this.files.length) {
+					const dataTransfer = new DataTransfer();
+					validFiles.forEach(f => dataTransfer.items.add(f));
+					this.files = dataTransfer.files;
+				}
+			});
+		}
+	</script>
+}

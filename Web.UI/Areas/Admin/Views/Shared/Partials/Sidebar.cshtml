@@ -1,0 +1,65 @@
+﻿<ul class="sidebar navbar-nav">
+    <li class="nav-item @if (ViewBag.Overview != null) {<text>active</text>}">
+        <a class="nav-link" href="@Url.Action("Dashboard", "Manage", new { area = "Admin" })">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
+    </li>
+  
+    <li class="nav-item @if (ViewBag.Pages != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/Page/Index">
+            <i class="fas fa-fw fa-list"></i>
+            <span>Pages</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item @if (ViewBag.ProductCategories != null) { <text>active</text> } ">
+        <a class="nav-link" href="/Admin/ProductCategories/index">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Product Categories</span>
+        </a>
+    </li>
+
+
+    <li class="nav-item @if (ViewBag.ManageProduct!= null) { <text>active</text> } ">
+        <a class="nav-link" href="/Admin/Product/ManageProduct">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Manage Product</span>
+        </a>
+    </li>
+
+
+
+
+    <li class="nav-item @if (ViewBag.Slider != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/Slider/Index">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Slider</span>
+        </a>
+    </li>
+      <li class="nav-item @if (ViewBag.Posts != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/Post/Index">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Blog Posts</span>
+        </a>
+    </li>
+    <li class="nav-item @if (ViewBag.BlogCategories != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/BlogCategories/Index">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Blog Categories</span>
+        </a>
+    </li>
+    <li class="nav-item @if (ViewBag.Authors != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/Authors/Index">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Authors</span>
+        </a>
+    </li>
+    <li class="nav-item @if (ViewBag.Options != null) {<text>active</text>}">
+        <a class="nav-link" href="/Admin/Admin/EnquiryList">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Enquiry List</span>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,106 @@
+﻿@model DataAccess.Model.Category
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.PageTitle = Html.Raw(" Edit Product Category  " + Model.CategoryName);
+    ViewBag.Categories = true;
+}
+
+<h1 class="h3 d-inline">@ViewBag.PageTitle</h1>
+<hr />
+
+@using (Html.BeginForm("Edit", "ProductCategories", FormMethod.Post, new { area = "Admin", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CategoryID)
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.CMSPageID, "CMS Page", new { @class = "control-label" })
+                            @Html.DropDownListFor(
+                            model => model.CMSPageID,
+                                                (List<SelectListItem>)ViewBag.CmsPages,
+                                                "-- Select Page --",
+                                                new { @class = "form-control" }
+                                                )
+                        @Html.ValidationMessageFor(model => model.CMSPageID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.CategoryName, "Category Name", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Category Name" } })
+                        @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="ogImage">Update Image (optional)</label>
+                        <input type="file" id="ogImage" name="file" class="form-control" accept="image/*" />
+                        <small class="form-text text-muted">Accepted formats: JPG, PNG, GIF</small>
+                    </div>
+
+                    <div >
+                        @if (!string.IsNullOrEmpty(Model.ImagePath))
+                            {
+                                <div class="form-group col-md-6">
+                                    <label class="d-block mb-2">Current Image:</label>
+                                    <div class="border p-2 bg-light rounded">
+                                        <img src="@Url.Content(Model.ImagePath)"
+                                             alt="@(!string.IsNullOrEmpty(Model.ImageName) ? Model.ImageName : "Category Image")"
+                                             style="max-height: 100px; max-width: 100%;"
+                                             class="img-thumbnail mb-2 d-block"
+                                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23ddd%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%23999%22%3EImage Not Found%3C/text%3E%3C/svg%3E';" />
+                                        <small class="text-muted d-block">
+                                            <strong>File:</strong> @Model.ImagePath
+                                        </small>
+                                    </div>
+                                    <div class="form-check mt-2">
+                                        <input type="checkbox" id="removeImage" name="removeImage" value="true" class="form-check-input" />
+                                        <label for="removeImage" class="form-check-label text-danger">
+                                            <small><i class="fas fa-trash"></i> Remove current image</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted"><small><i class="fas fa-image"></i> No image uploaded</small></p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(model => model.ParentCategoryID, "Parent Category", new { @class = "control-label fw-bold" })
+                            @Html.DropDownListFor(model => model.ParentCategoryID,
+                            new SelectList(ViewBag.ParentCategories, "CategoryID", "CategoryName", Model.ParentCategoryID),
+                                                "-- Select Parent Category --",
+                                                new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ParentCategoryID, "", new { @class = "text-danger" })
+                    </div>
+                
+
+
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.Description, "Description", new { @class = "control-label" })
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Enter Description", rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+              
+            </div>
+
+        </div>
+    </div>
+        <div class="card-footer text-right">
+                <input type="submit" class="btn btn-primary btn-block" value="Update" />
+            </div>
+</div>
+}

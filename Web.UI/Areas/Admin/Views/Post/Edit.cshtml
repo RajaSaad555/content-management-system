@@ -1,0 +1,143 @@
+﻿@model BusinessObject.ViewModel.PostViewModel
+@{
+    ViewBag.PageTitle = "Edit " + Model.Content.Title;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Posts = true;
+}
+
+
+@section Head {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet" />
+}
+<!-- Page Content -->
+<h1 class="h3 d-inline">@ViewBag.PageTitle</h1>
+<hr />
+
+@using (Html.BeginForm("Edit", "Post", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-lg-9 col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Content.Id)
+                    @Html.HiddenFor(model => model.Content.OgImagePath)
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <!-- Existing fields -->
+                    <div class="form-group">
+                        @Html.Label("Blog Title")
+                        @Html.EditorFor(model => model.Content.Title, "Blog Title", new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Blog Title" } })
+                        @Html.ValidationMessageFor(model => model.Content.Title, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content.MetaTitle, "Meta Title", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Content.MetaTitle, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Meta Title" } })
+                        @Html.ValidationMessageFor(model => model.Content.MetaTitle, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content.MetaKeyword, "Meta Keyword", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Content.MetaKeyword, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Meta Keyword" } })
+                        @Html.ValidationMessageFor(model => model.Content.MetaKeyword, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content.MetaKeywordDescription, "Meta Keyword Description", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Content.MetaKeywordDescription, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Meta Keyword Description" } })
+                        @Html.ValidationMessageFor(model => model.Content.MetaKeywordDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="ogImage">Upload Og Image (optional)</label>
+                            <input type="file" id="ogImage" name="file" class="form-control" />
+                        </div>
+                        <div class="col-6">
+                            <!-- Display current image if exists -->
+                            <div class="col-6">
+                                <!-- Display current image if exists -->
+                                @if (!string.IsNullOrEmpty(Model.Content.OgImagePath))
+                                {
+                                    <p>Current Image:</p>
+                                    <img src="@Url.Content("~/Uploads/" + Model.Content.OgImagePath)" alt="@Model.Content.OgImageAlt" style="max-height: 100px;" class="img-thumbnail mb-2" />
+                                    <div class="form-check mt-2">
+                                        <input type="checkbox" id="removeImage" name="removeImage" value="true" class="form-check-input" />
+                                        <input type="hidden" name="removeImage" value="false" />
+                                        <label for="removeImage" class="form-check-label text-danger">
+                                            <small><i class="fas fa-trash"></i> Remove current image</small>
+                                        </label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted"><small>No image uploaded</small></p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content.OgImageAlt, "Og Image Alt Tag", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Content.OgImageAlt, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Image alt tag" } })
+                        @Html.ValidationMessageFor(model => model.Content.OgImageAlt, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content.Slug, "Slug", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Content.Slug, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Post Slug" } })
+                        @Html.ValidationMessageFor(model => model.Content.Slug, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryId, "Category", new { @class = "control-label" })
+                        @Html.DropDownListFor(
+                        model => model.CategoryId,
+                                        new SelectList(Model.Categories, "Id", "Name", Model.CategoryId),
+                                        "-- Select Category --",
+                                        new { @class = "form-control", @autofocus = "autofocus" }
+                                        )
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.Content.ContentBody, new { @class = "form-control", @id = "Content_ContentBody" })
+                        @Html.ValidationMessageFor(model => model.Content.ContentBody, "", new { @class = "text-danger" })
+                    </div>
+
+
+
+                </div>
+            <div class="card-footer text-right col-md-2">
+                <input type="submit" class="btn btn-primary btn-block" value="Update" />
+            </div>
+
+        </div>
+        </div>
+
+       
+
+
+
+
+                
+                </div>
+
+             
+}
+@section Scripts {
+    <script src="~/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(function () {
+            $('#Content_ContentBody').summernote({
+                placeholder: 'Hello bootstrap 4',
+                tabsize: 3,
+                height: 300,
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Calibri'], // Add Calibri to this array
+            fontNamesIgnoreCheck: ['Calibri'], // Ignore font check for Calibri
+            callbacks: {
+                onInit: function() {
+                    // Optional: Set Calibri as the default font for the editable area
+                    $('.note-editable').css('font-family', 'Calibri');
+                }
+            }
+        });
+        });
+    </script>
+
+}

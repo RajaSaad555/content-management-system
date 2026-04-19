@@ -1,0 +1,9 @@
+﻿@model BusinessObject.ViewModel.CMSPageViewModel
+@{
+    ViewBag.PageTitle = "Pages";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Pages = true;
+}
+
+
+@Html.Raw(Model.ContentBody)

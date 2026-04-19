@@ -1,0 +1,433 @@
+﻿@model BusinessObject.ViewModel.ProductDetailViewModel
+
+@{
+	ViewBag.PageTitle = "Add Product";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@section Head {
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet" />
+
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+	<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+	<link rel="stylesheet" href="~/assets/css/main.css">
+
+
+
+}
+
+
+@* -------------------------------------------------------------------This is the add Section-------------------------------------------------- *@
+
+
+
+<div class="row">
+	<div class="col-lg-12 col-md-12 mb-3">
+
+
+		<div class="card">
+			<div class="card-body">
+		@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data", area = "Admin" }))
+		{
+			@Html.AntiForgeryToken()
+
+			
+					<article class="product-tabs-container py-3">
+						<h1 class="h3">@ViewBag.PageTitle</h1>
+						<hr />
+
+						<nav>
+							<div class="nav nav-tabs" id="nav-tab" role="tablist">
+								<button class="nav-link text-black product-tab active" id="nav-home-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+										aria-selected="true">
+									Product Info
+								</button>
+								<button class="nav-link text-black " id="nav-seo-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-seo" type="button" role="tab" aria-controls="nav-seo"
+										aria-selected="true">
+									SEO
+								</button>
+								<button class="nav-link text-black " id="nav-features-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-features" type="button" role="tab" aria-controls="nav-features"
+										aria-selected="true">
+									Features
+								</button>
+								<button class="nav-link text-black" id="nav-application-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-application" type="button" role="tab" aria-controls="nav-profile"
+										aria-selected="false">
+									Application
+								</button>
+								@* <button class="nav-link text-black" id="nav-Specification-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-Specification" type="button" role="tab" aria-controls="nav-contact"
+                        aria-selected="false">
+                    Specification
+                </button> *@
+								<button class="nav-link text-black" id="nav-download-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-download" type="button" role="tab" aria-controls="nav-disabled"
+										aria-selected="false">
+									Downloads
+								</button>
+								<button class="nav-link text-black" id="nav-pictures-tab" data-bs-toggle="tab"
+										data-bs-target="#nav-pictures" type="button" role="tab" aria-controls="nav-pictures"
+										aria-selected="true">
+									Pictures
+								</button>
+							</div>
+						</nav>
+						<div class="tab-content bg-white" id="nav-tabContent">
+							<div class="tab-pane fade product-tab-content show active" id="nav-home" role="tabpanel"
+								 aria-labelledby="nav-home-tab" tabindex="0">
+								<article class="row mb-4 p-4">
+									@* <h4 class="fw-bold mb-4"> Product Info</h4> *@
+
+									<div class="col-md-6 mb-3">
+										@Html.LabelFor(model => model.CMSPageID, "Select Page")
+										@Html.DropDownListFor(model => model.CMSPageID,
+										(IEnumerable<SelectListItem>)ViewBag.CmsPages,
+																		new { @class = "form-control", id = "CmsPageDropdown" })
+									@Html.ValidationMessageFor(m => m.CMSPageID, "", new { @class = "text-danger" })
+
+								</div>
+
+
+
+								<!-- Select Category -->
+								<div class="col-md-6 mb-3">
+									<label asp-for="CategoryID" class="form-label fw-bold">Select Category</label>
+									<select asp-for="CategoryID" id="CategoryID" name="CategoryID" class="form-select">
+										<option value="">-- Select Category --</option>
+										@foreach (var cat in Model.ListOfCategories)
+											{
+												<!-- Pre-select the category if it matches Model.CategoryID -->
+												<option value="@cat.CategoryID" @(cat.CategoryID == Model.CategoryID ? "selected" : "")>
+													@cat.CategoryName
+												</option>
+											}
+										</select>
+										@Html.ValidationMessageFor(m => m.CategoryID, "", new { @class = "text-danger" })
+									</div>
+
+
+								
+
+
+
+								</article>
+
+								<hr>
+								<article class="row my-4 p-4">
+									<div class="col-md-6 mb-3">
+										<label for="ProductName" class="form-label fw-bold">*Product Name</label>
+										@Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", placeholder = "Enter product name" })
+										@Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+									</div>
+
+
+									<div class="col-md-6 mb-3">
+										<label for="Slug" class="form-label fw-bold">*Slug Name</label>
+										@Html.TextBoxFor(m => m.Slug, new { @class = "form-control", placeholder = "Enter Slug" })
+										@Html.ValidationMessageFor(m => m.Slug, "", new { @class = "text-danger" })
+									</div>
+
+
+
+
+
+
+
+
+									<!-- Short Description -->
+									<div class="mb-3">
+										<label for="ShortDescription" class="form-label fw-bold">*Short Description</label>
+										@Html.TextAreaFor(m => m.ShortDescription, new { @class = "form-control", rows = 5 })
+										@Html.ValidationMessageFor(m => m.ShortDescription, "", new { @class = "text-danger" })
+									</div>
+
+
+
+
+									<!-- Full Description with Quill -->
+									<div class="mb-3">
+										<label for="FullDescription" class="form-label fw-bold">Full Description</label>
+										@*    @Html.TextAreaFor(m => m.FullDescription, new { @id = "FullDescription", @hidden = "hidden" }) *@
+
+
+
+										<div class="editor" style="height:unset">
+
+											@Html.TextAreaFor(model => model.FullDescription, new { @class = "form-control summernote" })
+
+										</div>
+										@Html.ValidationMessageFor(m => m.FullDescription, "", new { @class = "text-danger" })
+
+									</div>
+							</div>
+
+
+
+							<div class="tab-pane fade product-tab-content" id="nav-seo" role="tabpanel"
+								 aria-labelledby="nav-seo-tab" tabindex="0">
+								<article class="row my-4 p-4 ">
+									<article class=" col-md-12 mb-3 form-input">
+										<label for="MetaTitle" class="form-label fw-bold d-block">Meta Title</label>
+										<input type="text" class="form-control" id="MetaTitle"
+											   placeholder="Meta Title">
+
+									</article>
+									<article class=" col-md-12 mb-3 form-input">
+										<label for="MetaKeyWord" class="form-label fw-bold d-block">Meta Keyword</label>
+										<input type="text" class="form-control" id="MetaKeyWord"
+											   placeholder="Meta Keywords">
+
+									</article>
+									<article class=" col-md-12 mb-3 form-input">
+										<label for="metDescription" class="form-label fw-bold d-block">Meta Keyword Description</label>
+										<input type="text" class="form-control" id="metDescription"
+											   placeholder="Enter Meta Description">
+
+									</article>
+									<article class=" col-md-12 mb-3 form-input">
+										<label for="searchName" class="form-label fw-bold d-block">Friendly Page Name</label>
+										<input type="text" class="form-control" id="searchName"
+											   placeholder="Friendly Page Name">
+
+									</article>
+
+								</article>
+							</div>
+
+							<div class="tab-pane fade product-tab-content" id="nav-features" role="tabpanel"
+								 aria-labelledby="nav-features-tab" tabindex="0">
+								<article class="row my-4 p-4 ">
+									<article class=" col-md-12 mb-3 form-input">
+										<label for="Feature" class="form-label fw-bold d-block">Feature Description</label>
+										@*               @Html.TextAreaFor(m => m.Features, new { @class = "form-control", rows = 5 }) *@
+
+										@Html.TextAreaFor(model => model.Features, new { @rows = 5, @class = "form-control summernote" })
+
+									</article>
+									@*    <article class="col-md-12 mb-3">
+                    <label for="productName" class="form-label fw-bold d-block">Short Description</label>
+                    <textarea name="" id="" class="form-control" rows="5"></textarea>
+                </article> *@
+
+								</article>
+							</div>
+
+							<div class="tab-pane fade product-tab-content" id="nav-application" role="tabpanel"
+								 aria-labelledby="nav-application-tab" tabindex="0">
+								<article class="col-md-12 my-4 p-4 ">
+									<label for="Application" class="form-label fw-bold">Application</label>
+									@*     @Html.TextAreaFor(m => m.Application, new { @class = "form-control", rows = 5 }) *@
+
+									@Html.TextAreaFor(model => model.Application, new { @rows = 5, @class = "form-control summernote" })
+									@Html.ValidationMessageFor(m => m.Application, "", new { @class = "text-danger" })
+
+
+								</article>
+							</div>
+
+
+							<div class="tab-pane fade product-tab-content" id="nav-download" role="tabpanel"
+								 aria-labelledby="nav-download-tab" tabindex="0">
+								<article class="col-md-12 my-4 p-4 ">
+									<label for="Downloads" class="form-label fw-bold">Full Downloads</label>
+
+									@Html.TextAreaFor(model => model.Downloads, new { @rows = 5, @class = "form-control summernote" })
+
+									@*         @Html.TextAreaFor(m => m.Downloads, new { @class = "form-control", rows = 3 }) *@
+									<div id="editor-3">
+									</div>
+								</article>
+							</div>
+							<div class="tab-pane fade product-tab-content" id="nav-pictures" role="tabpanel"
+								 aria-labelledby="nav-pictures-tab" tabindex="0">
+								<article class="p-4 upload-image-section">
+									<h4 class="fw-bold pb-5">Upload Product Image</h4>
+									<label for="fileUpload" class="image-uploader rounded-3 text-center p-5">
+										<h4>Click to upload Image</h4>
+										<p>Individual file size is 200KB</p>
+										<input type="file"
+											   name="AllImages"
+											   asp-for="AllImages"
+											   id="fileUpload"
+											   class="form-control"
+											   accept="image/png, image/jpeg, image/jpg, image/gif"
+											   multiple />
+										<span asp-validation-for="AllImages" class="text-danger"></span>
+									</label>
+
+									<article class="py-3">
+										<h5 class="fs-6 fw-semibold">Uploaded Images</h5>
+										<div id="previewContainer"></div>
+									</article>
+								</article>
+							</div>
+						
+
+						</div>
+						
+					</article>
+					<div>
+						<button type="submit" class="btn btn-primary">Save Product</button>
+						<a href="@Url.Action("Index", "Product", new { area = "Admin" })" class="btn btn-secondary">Cancel</a>
+					</div>
+		}
+
+
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.summernote').summernote({
+				height: 450, // Adjust as needed
+				toolbar: [
+					['style', ['style']], // Heading styles
+					['font', ['bold', 'italic', 'underline', 'clear']],
+					['fontname', ['fontname']], // Font family
+					['fontsize', ['fontsize']], // Font size
+					['color', ['color']], // Text color
+					['para', ['ul', 'ol', 'paragraph']], // Lists and alignment
+					['height', ['height']], // Line height
+					['table', ['table']], // Table creation
+					['insert', ['link', 'picture', 'video']], // Insert options
+					['view', ['fullscreen', 'codeview', 'help']] // Fullscreen and code view
+				],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'], // Available font options
+				fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '64', '82', '150'], // Font size options
+				popover: {
+					image: [
+						['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+						['remove', ['removeMedia']],
+						['custom', ['imageAttributes']]
+					]
+				}
+			});
+		});
+
+		document.getElementById("fileUpload").addEventListener("change", function (event) {
+			const previewContainer = document.getElementById("previewContainer");
+			previewContainer.innerHTML = ""; // clear old previews
+
+			const files = event.target.files;
+
+			Array.from(files).forEach((file, index) => {
+				if (!file.type.startsWith("image/")) return;
+
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					const figure = document.createElement("figure");
+					figure.className = "uploaded-images d-flex align-items-center justify-content-between mb-2";
+
+					figure.innerHTML = `
+						<picture>
+							<img src="${e.target.result}" alt="Preview" class="img-fluid rounded-3"
+								 style="max-width:120px; height:auto;" />
+						</picture>
+						<figcaption class="d-flex align-items-center justify-content-between gap-5 w-100 ps-3">
+							<div class="form-check">
+								<input class="form-check-input border-secondary"
+									   type="radio" name="DefaultImage" value="${index}">
+								<label class="form-check-label">Make Default</label>
+							</div>
+							<article class="d-flex gap-2">
+								<button type="button" class="btn btn-outline-danger btn-sm remove-btn">
+									<i class="fa-solid fa-xmark"></i>
+								</button>
+							</article>
+						</figcaption>
+					`;
+
+					// remove preview from UI only
+					figure.querySelector(".remove-btn").addEventListener("click", () => {
+						figure.remove();
+					});
+
+					previewContainer.appendChild(figure);
+				};
+				reader.readAsDataURL(file);
+			});
+		});
+
+
+
+
+
+
+
+
+
+		const fileUpload = document.getElementById('fileUpload');
+		const previewContainer = document.getElementById('previewContainer');
+
+		fileUpload.addEventListener('change', function () {
+			previewContainer.innerHTML = ''; // clear previous previews
+
+			const validFiles = [];
+
+			Array.from(this.files).forEach(file => {
+				// ✅ Check if the file is an image
+				if (!file.type.startsWith('image/')) {
+					alert(`${file.name} is not an image file.`);
+					return;
+				}
+
+				// ✅ Check file size (400KB max)
+				if (file.size > 400 * 1024) {
+					alert(`${file.name} exceeds 400KB.`);
+					return;
+				}
+
+				validFiles.push(file); // keep valid files
+
+				// Preview image
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					const img = document.createElement('img');
+					img.src = e.target.result;
+					img.classList.add('img-thumbnail', 'm-1');
+					img.style.width = '100px';
+					img.style.height = '100px';
+					previewContainer.appendChild(img);
+				};
+				reader.readAsDataURL(file);
+			});
+
+			// Update input with valid files only
+			if (validFiles.length !== this.files.length) {
+				// Create a new DataTransfer to set filtered files
+				const dataTransfer = new DataTransfer();
+				validFiles.forEach(file => dataTransfer.items.add(file));
+				this.files = dataTransfer.files;
+			}
+		});
+
+
+
+
+
+
+
+	</script>
+
+}

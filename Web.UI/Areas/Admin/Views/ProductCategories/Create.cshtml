@@ -1,0 +1,113 @@
+﻿@model BusinessObject.ViewModel.ProductCategoryViewModel
+@{
+	ViewBag.PageTitle = "Create new Product Category";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+	ViewBag.Categories = true;
+}
+
+<h1 class="h3 d-inline">@ViewBag.PageTitle</h1>
+<hr />
+
+@using (Html.BeginForm("Create", "ProductCategories", FormMethod.Post, new { area = "Admin", enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	<div class="row">
+		<div class="col-lg-8 col-md-12 mb-3">
+			<div class="card">
+				<div class="card-body">
+					@* 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CMSPageID, "CMS Page ID", new { @class = "control-label" })
+                        @Html.EditorFor(model => model.CMSPageID, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter CMS Page ID" } })
+                        @Html.ValidationMessageFor(model => model.CMSPageID, "", new { @class = "text-danger" })
+                    </div> *@
+					<div class="form-group">
+						<label for="CMSPageID">CMS Page</label>
+						@Html.DropDownListFor(model => model.CMSPageID, (List<SelectListItem>)ViewBag.CmsPages,/*  "-- Select Page --", */ new { @class = "form-control" })
+					</div>
+
+
+					<div class="form-group">
+						@Html.LabelFor(model => model.CategoryName, "*Category Name", new { @class = "control-label" })
+						@Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Category Name" } })
+						@Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+					</div>
+
+
+
+					@*             <div class="form-group">
+                        @Html.LabelFor(model => model.CategoryName, "Category Name", new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.CategoryName,
+                        (SelectList)ViewBag.CategoryNames,
+                                        "Select Category Name",
+                                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                </div> *@
+
+
+
+
+
+
+				@* 	<div class="form-group">
+						@Html.LabelFor(model => model.ParentCategoryID, "Parent Category")
+						@Html.DropDownListFor(model => model.ParentCategoryID,
+						new SelectList(ViewBag.ParentCategories, "CategoryID", "CategoryName"),
+										"Select Parent Category",
+										new { @class = "form-control" })
+				</div> *@
+					<div class="form-group">
+						@Html.LabelFor(model => model.ParentCategoryID, "Parent Category", new { @class = "control-label fw-bold" })
+						@Html.DropDownListFor(model => model.ParentCategoryID,
+						new SelectList(ViewBag.ParentCategories, "CategoryID", "CategoryName"),
+										"-- Select Parent Category --",
+										new { @class = "form-control" })
+
+					@Html.ValidationMessageFor(model => model.ParentCategoryID, "", new { @class = "text-danger" })
+				</div>
+
+
+				<div class="form-group">
+					@Html.LabelFor(model => model.Description, "*Description", new { @class = "control-label" })
+					@Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Description" } })
+					@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+				</div>
+
+
+				@*     <div class="form-group">
+                    <input type="file" name="file" id="file" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                </div>
+ *@
+
+				<div class="row">
+					<div class="form-group col-6">
+						<label for="ogImage">Upload Image (optional)</label>
+						<input type="file" id="ogImage" name="file" class="form-control" />
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+			</div>
+
+			
+		</div>
+
+		<div class="card-footer text-left">
+			<input type="submit" class="btn btn-primary px-4" value="Save" />
+		</div>
+
+	</div>
+
+		
+</div>
+}
+

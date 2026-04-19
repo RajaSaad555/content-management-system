@@ -1,0 +1,169 @@
+﻿@model BusinessObject.ViewModel.CMSPageViewModel
+
+@{
+	ViewBag.PageTitle = "Create new page";
+	Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+	ViewBag.Pages = true;
+}
+
+<style>
+	.custom-dropdown {
+		width: 200px; /* Adjust the width as necessary */
+	}
+</style>
+
+@section Head {
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet" />
+}
+
+<h1 class="h3 d-inline">@ViewBag.PageTitle</h1>
+<hr />
+
+
+@using (Html.BeginForm())
+{
+	<div class="row">
+		<div class="col-lg-12 col-md-12 mb-3">
+			<div class="card">
+				<div class="card-body">
+					@Html.AntiForgeryToken()
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+					<div class="row">
+						<div class="form-group col-6">
+							@Html.LabelFor(model => model.Title, "*Page Title")
+							@Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Title" } })
+							@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+						</div>
+
+						<div class="form-group col-6">
+							<div class="form-check mt-4">
+								@Html.CheckBoxFor(model => model.IsInnerPage, new { @class = "form-check-input", id = "IsInnerPage" })
+								@Html.LabelFor(model => model.IsInnerPage, "Is Inner Page?", new { @class = "form-check-label" })
+							</div>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="form-group col-6">
+							@Html.LabelFor(model => model.PageId, "Select Page")
+							@Html.DropDownListFor(model => model.PageId,
+							(IEnumerable<SelectListItem>)ViewBag.CmsPages,
+												new { @class = "form-control", id = "CmsPageDropdown" })
+
+					</div>
+
+					<div class="form-group col-6">
+						@Html.LabelFor(model => model.Summary, "*Page Summary")
+						@Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control", @placeholder = "Summary" } })
+						@Html.ValidationMessageFor(model => model.Summary, "", new { @class = "text-danger" })
+					</div>
+
+
+
+				</div>
+				<div class="row">
+					<div class="form-group col-6">
+						@Html.LabelFor(model => model.Slug, "*Page Slug (Friendly Name)")
+						@Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control", @placeholder = "Slug" } })
+						@Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+					</div>
+
+					
+				</div>
+
+				<div class="row">
+					<div class="form-group col-6">
+						@Html.LabelFor(model => model.MetaKeywords, "*Meta Keywords")
+						@Html.EditorFor(model => model.MetaKeywords, new { htmlAttributes = new { @class = "form-control", @placeholder = "Meta Keywords" } })
+						@Html.ValidationMessageFor(model => model.MetaKeywords, "", new { @class = "text-danger" })
+					</div>
+
+					<div class="form-group col-6">
+						@Html.LabelFor(model => model.MetaDescription, "*Meta Description")
+						@Html.EditorFor(model => model.MetaDescription, new { htmlAttributes = new { @class = "form-control", @placeholder = "Meta Description" } })
+						@Html.ValidationMessageFor(model => model.MetaDescription, "", new { @class = "text-danger" })
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="form-group col-12">
+						@Html.LabelFor(model => model.ContentBody, "Content")
+						@Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control summernote", id = "Content" })
+					</div>
+				</div>
+
+				<div class="row">
+
+						<div class="form-group col-2">
+
+							<div class="text-right">
+								<input type="submit" class="btn btn-primary btn-block" value="Publish" />
+							</div>
+
+						</div>
+				
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+}
+
+@section Scripts {
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.summernote').summernote({
+				height: 400, // Adjust as needed
+				toolbar: [
+					['style', ['style']], // Heading styles
+					['font', ['bold', 'italic', 'underline', 'clear']],
+					['fontname', ['fontname']], // Font family
+					['fontsize', ['fontsize']], // Font size
+					['color', ['color']], // Text color
+					['para', ['ul', 'ol', 'paragraph']], // Lists and alignment
+					['height', ['height']], // Line height
+					['table', ['table']], // Table creation
+					['insert', ['link', 'picture', 'video']], // Insert options
+					['view', ['fullscreen', 'codeview', 'help']] // Fullscreen and code view
+				],
+				fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'], // Available font options
+				fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '64', '82', '150'], // Font size options
+				popover: {
+					image: [
+						['resize', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+						['remove', ['removeMedia']],
+						['custom', ['imageAttributes']]
+					]
+				}
+			});
+
+
+			function toggleCmsDropdownRequired() {
+				if ($("#IsInnerPage").is(":checked")) {
+					// make dropdown mandatory
+					$("#CmsPageDropdown").attr("required", "required");
+				} else {
+					// remove mandatory requirement
+					$("#CmsPageDropdown").removeAttr("required");
+				}
+			}
+
+			// Run on page load
+			toggleCmsDropdownRequired();
+
+			// Run on checkbox change
+			$("#IsInnerPage").change(function () {
+				toggleCmsDropdownRequired();
+			});
+
+
+		});
+	</script>
+}
